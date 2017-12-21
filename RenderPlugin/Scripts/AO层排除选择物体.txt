@@ -1,0 +1,11 @@
+
+
+import pymel.core as pm
+
+
+selection = pm.ls( selection=True )
+
+
+for item in selection :
+
+	pm.addAttr(item, ln="miLabel", at="short", dv=5)

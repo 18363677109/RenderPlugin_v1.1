@@ -1,0 +1,67 @@
+//创建外边窗口界面；
+global proc RenderTool(){
+
+    if(`window -exists "mywindow"`){
+        deleteUI -window "mywindow";
+    }
+
+    if (`window -ex "ImportLightingWindow"`){
+        deleteUI "ImportLightingWindow";
+    }
+
+    global string $myPath;
+
+    window -t "QDISA render plugins_V1.02" -s 0 mywindow;
+
+    columnLayout -adj 1 "Mainlayout";
+
+        
+//材质 大纲 和属性窗口的功能
+    	frameLayout -l "操作窗口" -cll true -bs "in" -bv true;
+            rowColumnLayout -nc 3;
+                iconTextButton -h 80 -st "iconAndTextVertical" -i1 ($myPath + "/Images/01.png") -l "材质" -c "HypershadeWindow";
+                iconTextButton -h 80 -st "iconAndTextVertical" -i1 ($myPath + "/Images/020.png") -l "大纲" -c "OutlinerWindow";
+                iconTextButton -h 80 -st "iconAndTextVertical" -i1 ($myPath + "/Images/021.png") -l "属性" -c "SpreadSheetEditor";
+        	setParent ..;
+        setParent ..;
+
+  
+    	
+        frameLayout -l "灯光链接" -cll true -bs "in" -bv true;
+            rowColumnLayout  -nc 4;
+                iconTextButton -h 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/10.bmp") -l "建立" -c "MakeLightLinks";
+              	iconTextButton -h 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/09.bmp") -l "断开" -c "BreakLightLinks";
+                iconTextButton -h 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/11.bmp") -l "灯光" -c "SelectObjectsIlluminatedByLight";
+                iconTextButton -h 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/12.bmp") -l "物体" -c "SelectLightsIlluminatingObject";
+        	setParent ..;
+        setParent ..;
+
+    	frameLayout -l "自动分层" -cll true -bs "in" -bv true;
+            rowColumnLayout;	
+             	iconTextButton -h 160 -st "iconAndTextVertical" -i1 ($myPath + "/Images/15.bmp") -l "分层" -c "AutoLayer()" -stp "python";
+                popupMenu;
+                    string $popmenu;
+                    string $popmenus[] = {"CH","CH_MASK","ENV","ENV_MASK","ENV_AO","RGB"};
+                    for ($popmenu in $popmenus){
+                        menuItem -l $popmenu -c ("python \"AL_CheckList();AL_CrtLayer('" + $popmenu + "',cmds.getModifiers());AL_ClearList()\"");
+                    }
+            setParent ..;
+        setParent ..;
+
+        frameLayout -l "其他功能" -cll true -bs "in" -bv true;
+            rowColumnLayout -nc 4;
+                iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/16.bmp") -l "灯光清理" -c ("source \"" + $myPath + "/" + "Scripts" + "/" + "jrLightLinksCleanUp.mel\";");
+                iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/08.bmp") -l "材质清理" -c ("hyperShadePanelMenuCommand(\"hyperShadePanel1\", \"deleteUnusedNodes\");");
+                iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/07.bmp") -l "打开看图器" -c "system(\"start T:/BL_Mid/xXx/Pdplayer 64/pdplayer64.exe\")"; 
+                //上一句的已经破解的插件的路径记得修正
+                iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/02.png") -l "设置RGB" -c "RGBUI()" -stp "python";
+        	setParent ..;
+        setParent ..;
+
+    setParent ..;
+
+    showWindow "mywindow";
+
+}
+
+RenderTool();

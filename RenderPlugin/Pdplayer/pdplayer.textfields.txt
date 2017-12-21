@@ -1,0 +1,236 @@
+Pdplayer Text Fields
+--------------------
+
+Starting with Pdplayer 1.0.4, the text in text layers may contain embedded
+fields of the form {object:property}. Such fields are replaced with their
+values before the text is displayed. To disable expansion of a specific field,
+double the { character; for example, to insert the literal text {clock:date},
+use {{clock:date}.
+
+The field object (the part before the colon) can be "composition", "timeline",
+"clock", "mask", a single layer, or a layer set.
+
+The composition object supports a single property:
+
+{composition:name}                 composition name such as "fields.pdpcomp"
+
+The timeline object supports the following properties:
+
+{timeline:frame}                   current frame
+{timeline:frame+2}                 current frame plus 2
+{timeline:frame-1}                 current frame minus 1
+{timeline:frame,4}                 current frame, padded with zeros to length 4
+{timeline:frame-1,4}               current frame minus 1, padded to length 4
+
+{timeline:timecode}                current frame, converted to timecode using
+                                    the current frames per second
+{timeline:timecode+584}            current frame plus 584, as timecode
+{timeline:timecode/30}             current frame as timecode using 30 fps
+{timeline:timecode/29.97}          current frame as drop frame NTSC timecode
+{timeline:timecode+85521/24}       current frame +85521 using 24 fps
+
+The clock object supports the following properties:
+
+{clock:date}                       current date (in local, short form)
+{clock:longdate}                   current date in local long form
+{clock:time}                       current time
+{clock:%Y-%m-%d}                   current date, in year-month-day form
+{clock:%d.%m.%Y}                   current date, in day.month.year form
+{clock:%H:%M:%S}                   current time, in 24hr hour:minute:second form
+
+Other format strings are possible, see appendix 1 for description.
+
+The mask object supports the following properties:
+
+{mask:width}                       current mask width
+{mask:height}                      current mask height
+
+A layer can be identified by index or by name. A positive index identifies a layer
+starting from the top of the layer stack, and a negative number - from the bottom. So,
+for example, {1:name} refers to the name of the first layer, and {-1:name} refers to
+the name of the last layer (first from bottom). A layer can be identified by name by
+enclosing the name in single quotes, as in {'######.dpx':path}. The layer after
+'######.dpx' can be identified with {'######.dpx'+1:path}, and other offsets also work.
+
+A layer supports the following properties:
+
+{1:name}                           layer name
+{1:width}                          layer width
+{1:height}                         layer height
+{1:length}                         layer length in frames
+{1:timecode}                       embedded timecode, from file header
+{1:edgecode}                       embedded edgecode, from file header
+{1:keycode}                        same as edgecode
+
+The following three fields support offset and width as described for {timeline:frame}.
+
+{1:frame}                          layer frame, zero-based
+{1:fnframe}                        frame from file name
+{1:emframe}                        embedded frame, from file header
+
+{1:path}                           path to current frame
+
+The path property can be indexed to select a single path element or a sequence of
+elements:
+
+{1:path[1]}                        selects the first element of the path
+{1:path[2]}                        selects the second element of the path
+{1:path[-1]}                       selects the last element of the path (the file name)
+{1:path[1..3]}                     selects first three elements
+{1:path[1..-2]}                    selects from the first to the second to last (that is,
+                                   everything but the file name)
+
+Suppose that {1:path} is "D:\footage\000186_10\557568.dpx". Then,
+
+{1:path[1]}                        is "D:\"
+{1:path[2]}                        is "footage\"
+{1:path[3]}                        is "000186_10\"
+{1:path[4]}                        is "557568.dpx"
+{1:path[5]}                        is ""
+
+{1:path[-1]}                       is "557568.dpx"
+{1:path[-2]}                       is "000186_10\"
+{1:path[-3]}                       is "footage\"
+{1:path[-4]}                       is "D:\"
+{1:path[-5]}                       is ""
+
+{1:path[1..2]}                     is "D:\footage\"
+{1:path[-2..-1]}                   is "000186_10\557568.dpx"
+
+The layer properties can also be used with a set of layers. In this case, the field is
+replaced with the properties of the layers in the set, separated with new lines. So, for
+example, {1,2,3:name}, where the names of the first three layers are "Layer 1", "Layer 2"
+and "Layer 3", is replaced by:
+
+Layer 1
+Layer 2
+Layer 3
+
+A layer set can have the following forms:
+
+* selection, -selection
+
+Identifies the currently selected layers. -selection is the same, but in reverse order.
+Example: {selection:name}.
+
+* group(K), -group(K)
+
+Identifies the layers having group ID of K. -group is in reverse order. Example:
+{-group(4):timecode}.
+
+* layer..layer
+
+Identifies several consecutive layers, where "layer" in the above represents a single
+layer identified by index or name, as in the previous section. Examples: {1..5:name},
+{1..-1:name}, {'Adjustment 1'+1..-1:name}.
+
+* set,set,...,set
+
+Combines several layer sets of the previous forms. Examples: {1..2,5,8..-1:name},
+{group(1),group(2):path}.
+
+* set!set
+
+Takes the first set and discards all layers in the second. If the first set is not
+present, takes all layers as the first set. Examples: {!group(1):name} - the names of
+all layers that are not in group 1, {group(2)!1..5:name} - the names of all layers in
+group 2 that are not among the first five.
+
+An additional syntax, {set::property}, can be used to scan 'set' for the first layer
+for which the current time falls within the in:out points. 'property' is then taken
+from that layer. This is useful when several clips are arranged one after another. As
+an example, if the last three layers in the stack are such sequentially arranged clips,
+
+{-3..-1::timecode}
+{-1..-3::timecode}
+
+will both select the timecode of the current clip. The difference between the two is
+that the first will scan from top to bottom, and the second will scan in reverse order.
+This may be significant if the layers overlap.
+
+---
+
+Appendix 1: clock date/time format specifiers
+
+The clock object supports a format string as property. In the string, the following
+format codes are replaced as described:
+
+%a
+Abbreviated weekday name
+
+%A
+Full weekday name
+
+%b
+Abbreviated month name
+
+%B
+Full month name
+
+%c
+Date and time representation appropriate for locale
+
+%d
+Day of month as decimal number (01 – 31)
+
+%H
+Hour in 24-hour format (00 – 23)
+
+%I
+Hour in 12-hour format (01 – 12)
+
+%j
+Day of year as decimal number (001 – 366)
+
+%m
+Month as decimal number (01 – 12)
+
+%M
+Minute as decimal number (00 – 59)
+
+%p
+Current locale's A.M./P.M. indicator for 12-hour clock
+
+%S
+Second as decimal number (00 – 59)
+
+%U
+Week of year as decimal number, with Sunday as first day of week (00 – 53)
+
+%w
+Weekday as decimal number (0 – 6; Sunday is 0)
+
+%W
+Week of year as decimal number, with Monday as first day of week (00 – 53)
+
+%x
+Date representation for current locale
+
+%X
+Time representation for current locale
+
+%y
+Year without century, as decimal number (00 – 99)
+
+%Y
+Year with century, as decimal number
+
+%z, %Z
+Either the time-zone name or time zone abbreviation, depending on registry settings; no characters if time zone is unknown
+
+%%
+Percent sign
+
+The # flag may prefix any formatting code. In that case, the meaning of the format code is changed as follows.
+
+%#a, %#A, %#b, %#B, %#p, %#X, %#z, %#Z, %#%
+ # flag is ignored.
+ 
+%#c
+ Long date and time representation, appropriate for current locale. For example: "Tuesday, March 14, 1995, 12:41:29".
+ 
+%#x
+ Long date representation, appropriate to current locale. For example: "Tuesday, March 14, 1995".
+ 
+%#d, %#H, %#I, %#j, %#m, %#M, %#S, %#U, %#w, %#W, %#y, %#Y
+ Remove leading zeros (if any).

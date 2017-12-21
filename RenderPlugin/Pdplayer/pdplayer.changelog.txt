@@ -1,0 +1,599 @@
+1.0.5.21:
+
+  Nuke flipbook integration is now cross-platform and supports Nuke 6.2 (#382)
+
+1.0.5.20:
+
+  Fix #354 (Frame buffer layers on Linux and Mac OS X)
+  Fix #394 (Relative .pdpcmd filenames don't work)
+
+1.0.5.19:
+
+  Added support for AJA Kona on Windows via DirectShow
+    AJA DirectShow drivers are available from http://www.aja.com/products/oem/directshow.php
+    Note that these drivers only support 32 bit applications at the moment
+
+  Fix #241 (Scale is not exported properly to Nuke)
+
+1.0.5.18:
+
+  Added WAV export (#376)
+  Fix #379 ("Rescan for new frames" doesn't work after switching a version)
+  Fix #383 (Versioned movies in the same directory don't work)
+  Fix #392 (Add a command line option for PCM audio in MOV export)
+
+1.0.5.17:
+
+  Fix #372 (DPX images with a certain size don't work over the network with an XP64 client)
+  Fix #384 (Save Layer as... doesn't properly filter AVI codecs by the layer resolution (always uses mask))
+  Fix #386 (No command-line option to set the layer audio volume)
+  Fix #387 (No command-line option to set the global audio volume)
+  Fix #388 (The layer volume is not exported to .pdpcmd)
+  Fix #390 ("Position after Next Layer" should support multiple selection)
+
+1.0.5.16:
+
+  Add --crop={left_half,right_half,top_half,bottom_half} (#385)
+  Fix #389 (Display peak audio volume in the layer tooltip)
+  Update software license server to fix an issue with single machine taking more
+    than one license
+
+1.0.5.15:
+
+  Fix #357 (No command-line option to set the alpha source)
+  Fix #365 (Set Work Area to Selection doesn't work when multiple layers are selected)
+  Fix #366 (Duplicate should add an apostrophe to the layer name)
+  Fix #367 (Duplicate should work when multiple layers are selected)
+  Add --layer_resize_to_mask (#368)
+  Add --layer_align_to_mask (#369)
+
+1.0.5.14:
+
+  Fix #378 ("Add Other Stereo View" doesn't seem to work properly with Quicktime movies)
+
+1.0.5.13:
+
+  Add high quality hint to DV Quicktime tracks on export
+  Always decode Quicktime at high quality on playback
+
+1.0.5.12:
+
+  Fix #373 (Audio is not enabled after opening a composition containing audio tracks)
+
+1.0.5.11:
+
+  Fix #371 (In some cases, enabling ext on secondary incorrectly uses the primary display)
+
+1.0.5.10:
+
+  Add support for compressed .vrimg files (#364)
+  Add support for the 720x486x23.98 Decklink mode (#363)
+  Fix #358 (Arrow keys (nudge) don't work when multiple layers are selected)
+  Fix #359 (The D hotkey doesn't work when multiple layers are selected)
+  Fix #362 (Negative frames not supported)
+
+1.0.5.9:
+
+  Minor video input enhancements
+  Enabled TIFF support in the Mac version
+
+1.0.5.8:
+
+  Fixed an issue with Add Other Stereo View and Rescan/Watch for New Frames
+
+1.0.5.7:
+
+  Update the 32 bit vrlserver2.exe to not require SSE2
+
+1.0.5.6:
+
+  Removed the target combo box from the save dialog
+  Implemented Quicktime load and save in the 32 bit Mac version
+  Added support for depth-only IFF images
+
+1.0.5.5:
+
+  Mac OS X version
+  Added --pp_tab option, --pp_next_tab, --pp_prev_tab commands
+
+1.0.5.4:
+
+  '*' is now supported as a wildcard in addition to '?', '#' and '%04d'.
+  Non-padded sequences (file.9.tga, file.10.tga...) are now supported. (#142)
+  "Disable Caching by Default" option added to the Edit menu (#347)
+  "Continue Playback after Scrubbing" option added to the Play menu (#348)
+
+1.0.5.3:
+
+  Save Mask as Sequence now uses the frame numbers of the work area (#346)
+  Save Mask as Sequence and Save Layer as now recognize filenames that
+    already contain a frame number (f.ex. filename_0021.tga) and use it
+    as a starting point
+
+1.0.5.2:
+
+  --fcheck option added, for Maya compatibility (#345)
+  Fixed #338 (%04d doesn't work correctly with --range=92014-92080)
+  Floating point .3dl support (assumed linear by default) (#344)
+
+1.0.5.1:
+
+  Linux version
+  File names that end with ### are now supported on export, with the #'s
+    being replaced with the frame number (#339)
+
+1.0.4.17:
+
+  Fixed #343 (Border, Safe Area are disabled for adjustment layers)
+  Updated manual to cover 1.0.4 features.
+
+1.0.4.16:
+
+  Minor DirectShow improvements
+  Added instructions on how to reprogram the dongle to the
+    "License not found" dialog in the hardware license build (#340)
+  Fixed #341 (EXR images with Cyrillic names do not open)
+  Fixed #342 (TIFF images with Cyrillic names do not open)
+
+1.0.4.15:
+
+  Fixed an issue with the Validate button in the license dialog
+
+1.0.4.14:
+
+  Added Name and Group ID fields to the Placement tab. (#330)
+    (Border and Safe Area have been moved to the Effects tab.)
+  Added Select Group and Assign New Group to the Edit menu, and
+    the corresponding --layer_select_group and --layer_assign_group
+    commands. (#331)
+  Double-clicking a layer number now selects the layer group.
+  Improved menu.py, the Nuke flipbook integration script in the extras/nuke
+    directory, to support stereo.
+
+1.0.4.13:
+
+  Added DCI_XYZ.cms to the LUTs directory (#332)
+
+1.0.4.12:
+
+  Added a {set::property} syntax that selects the first layer in the set
+    for which the current time is within the in:out points (#328)
+
+1.0.4.11:
+
+  Fixed #256 (AVI export should save an audio track)
+
+1.0.4.10:
+
+  Fixed #257 (MOV export should save an audio track)
+
+1.0.4.9:
+
+  Fixed #250 (Pdplayer cannot play audio from Quicktime files)
+    Note that audio will not load if the movie is longer than 30 minutes
+  Added s-log.cms to the LUTs directory (#333)
+
+1.0.4.8:
+
+  Fixed #249 (Pdplayer cannot play audio from AVI files)
+    Note that audio will not load if the movie is longer than 30 minutes
+
+1.0.4.7:
+
+  Updated the RED SDK to 3.0
+    Replaced the Exposure control with FLUT
+    Added REDcolor
+    Added a gamma space control and REDgamma
+
+1.0.4.6:
+
+  Fixed #316 (Copy/paste color corrections doesn't transfer all settings)
+  Fixed #317 (EXR .r .g .b [.a] layers not displayed)
+  Fixed #324 (Support for incomplete VRIMG files)
+  Fixed #293 (Copy Layer as .nk should work when multiple layers are selected)
+  Fixed #292 (Image layer not exported to Nuke)
+  Fixed #312 (The initial ~0.2s of a WAV file aren't played)
+
+1.0.4.5:
+
+  Added support for text fields, such as {timeline:timecode} and {selection:path}. (#322)
+    See pdplayer.textfields.txt for a description.
+  Moved offset in perfs to the end of the edgecode format (#325).
+  Fixed #320 ("Composition Timecode" doesn't respect the frame base)
+  Fixed #321 ("Composition Timecode" doesn't handle 29.97 drop frame properly)
+
+1.0.4.4:
+
+  Fixed #323 (Exporting a 3D LUT w/ color corrections should produce a LUT tailored to the layer type)
+
+1.0.4.3:
+
+  Improved accuracy of 3D lookup tables
+
+1.0.4.2:
+
+  Fixed #319 (The frame base context menu doesn't work)
+
+1.0.4.1:
+
+  Internal portability improvements
+
+1.0.3.12:
+
+  Added support for hardware (dongle) licenses
+
+1.0.3.10:
+
+  Added support for LSB DPX and CIN files
+  Fixed loading of some not-quite-correct DPX files
+
+1.0.3.9:
+
+  Updated the RED SDK to 2.3
+  Re-enabled the R3D color controls in the 64 bit version
+  Enabled embedded frame number, timecode, edge code indicators for R3D files
+
+1.0.3.8:
+
+  Disabled R3D color controls in the x64 version due to an issue with the 64 bit RED SDK
+
+1.0.3.7:
+
+  Fixed a problem with 3D LUTs and R3D files
+  Fixed a problem with the channel selector and CIN/DPX files
+  Fixed a problem with relocating an R3D layer
+  Added filmstream.cms, pdlog985.cms, rec709.cms, redlog.cms to the LUTs directory
+
+1.0.3.6:
+
+  R3D tab added
+
+1.0.3.5:
+
+  Updated the RED SDK to 2.2
+  Changed the tooltip of the external output button to be more informative
+
+1.0.3.4:
+
+  Added secondary/tertiary display as an external device
+
+1.0.3.3:
+
+  Enabled internal and external alpha for the Decklink output
+
+1.0.3.2:
+
+  Fixed an issue with alternate EXR layers with a data window
+
+1.0.3.1:
+
+  Preliminary support for R3D via the RED SDK (2.0 beta)
+
+1.0.2.18:
+
+  Fixed an issue with loading some invalid .cms files
+
+1.0.2.17:
+
+  Versioned footage is now rescanned for versions when a composition is loaded
+
+1.0.2.16:
+
+  Fixed an issue with the Add Layer dialog not following shortcuts
+  Added two more stereo modes, green/magenta anaglyph and checkerboard
+
+1.0.2.15:
+
+  Fixed an issue with the half/quarter cache resolution not conserving memory as expected
+    with 8 bit images such as TGA and JPEG.
+
+1.0.2.14:
+
+  --layer_channels option added (#310)
+
+  prefix_v#_suffix is now recognized as a versioned directory (#289); some additional examples
+    of versioned footage are given below:
+
+	Example 4:
+
+    D:\shot08\scene15_v2\bg\shot08_scene15_v2_bg_0001.tga
+    D:\shot08\scene15_v3\bg\shot08_scene15_v3_bg_0001.tga
+
+    Example 5:
+
+    C:\projects\promo_v2_before_cc\v2_0001.tga
+    C:\projects\promo_v3_after_cc\v3_0001.tga
+
+    Example 6:
+
+    X:\Footage\conv\V002_2009_05_27\conv_V002_proxy_h264.mov
+    X:\Footage\conv\V003_2009_05_31\conv_V003_proxy_h264.mov
+
+1.0.2.13:
+
+  "Add Other Stereo View", --add_other_stereo_view added
+
+  The following words are recognized in the path:
+
+    "left", "Left", "LEFT", "L", "lf", "LF" identify the left view
+    "right", "Right", "RIGHT", "R", "rt", "RT" identify the right view
+
+1.0.2.12:
+
+  Changing a blend mode when a multiple selection is active now affects all selected layers (#291)
+  Replace With... when multiple layers are selected now asks for a base folder and relocates
+    content (#260)
+  Copy Layer now works when multiple layers are selected
+
+1.0.2.11:
+
+  Select All Layers (Ctrl+A), --layer_select_all added (#294)
+  Delete Selected now works when multiple layers are selected (#301)
+  Fixed #302 (AVI movies are kept locked even when the layer is deleted because of the Undo buffer)
+
+1.0.2.10:
+
+  Fixed #111 (Alpha Source does not work on Adjustment Layer)
+  Fixed #160 (--timeline before the first layer in a pdpcmd or on the command line doesn't work)
+  "Expand into Layers" command added (#290)
+  Per-layer Safe Area option added to the Placement tab (#298)
+  'Channels' added to the Source tab (#297)
+
+1.0.2.9:
+
+  Added JPEG quality and TGA compression options to the Save dialogs. --save_mask_as_sequence and
+    --save_layer_as have been updated to accept them as well. (#219, #272)
+
+1.0.2.8:
+
+  Stereoscopic support added (#281)
+
+  --stereo_view, --stereo_mode, --target_view, --image_layer, --image_layer_index, --switch_views
+    options added
+
+1.0.2.7:
+
+  Versioning support added (#280); use the Version chooser on the Source tab to switch between
+    versions. Versions are enabled when the file path contains a directory with the following name:
+
+    v or V, followed by one or more digits, optionally followed by _ and an arbitrary string
+
+    Examples of version directory names: v2, V004, v04_before_cc
+
+    The version string is automatically replaced in the file name, if present
+    
+    Examples of versioned footage:
+
+	Example 1:
+
+    D:\shot08\scene_15\v02\bg\bg_v02_0001.tga
+    D:\shot08\scene_15\v03\bg\bg_v03_0001.tga
+
+    Example 2:
+
+    C:\projects\promo\v2_before_cc\0001.tga
+    C:\projects\promo\v3_after_cc\0001.tga
+
+    Example 3:
+
+    X:\Footage\conv\V002_2009_05_27\conv_proxy_h264.mov
+    X:\Footage\conv\V003_2009_05_31\conv_proxy_h264.mov
+
+  Added a scroll bar on the layer stack (#254)
+
+1.0.2.6:
+
+  Moved pdplayer.keydefs.txt and pdplayer.messages.txt to config/keydefs.txt and config/messages.txt
+  It is now possible to override them with user/keydefs.txt and user/messages.txt
+
+  Added an "Open Unsaved" menu (#261)
+
+1.0.2.5:
+
+  Fixed #275 (The unused lookup tables need not and should not be saved with the composition)
+  Fixed #277 (The unused lookup tables should not be imported when a composition is loaded)
+  Added "Delete All Unused Tables" in the LUT menu (#274)
+
+1.0.2.4:
+
+  Support for EXR image layers added
+
+1.0.2.3:
+
+  Support for VRIMG image layers added
+
+1.0.2.2:
+
+  Added an "Embed Layer" command, --embed_layer (#215)
+
+1.0.2.1:
+
+  Added layer fade in and fade out areas (Opacity and Fade in the Blending tab) (#268)
+  --fade_in, --fade_out options added
+
+1.0.1.39:
+
+  Double-clicking on a crop rectangle side resets it
+
+1.0.1.38:
+
+  16 bit TGA files are now supported (#271)
+
+1.0.1.37:
+
+  "Do not save alpha channel" now defaults to on for Ni layers (#265)
+  Fixed #269 (Half/Quarter resolution doesn't work correctly with AVI/MOV files)
+  Added e-mail mask commands (#236)
+  Added "Paste Color" to the background context menu (#242)
+  Fixed #263 (3D LUTs don't work on a frame buffer layer)
+  --preload_all_layers added
+  Fixed #267 (Open Composition does not preload)
+  Fixed #270 (Active preloads do not respect changes to the cache resolution)
+
+1.0.1.36:
+
+  --primary_color_key, --secondary_color_key options added (#239)
+  Paste Shadow Color, Set Black Point, Paste Black Point added (#238)
+
+1.0.1.35:
+
+  Added the --force_sequence option. This is useful when launching
+    Pdplayer from the command line to watch a sequence that is going
+    to be rendered, but may not be present yet:
+
+    start pdplayer D:\renders\foo\foo_rgb_0001.tga --force_sequence --layer_watch_sequence
+
+  Added 2048x1080, 2048x1556 as mask presets
+
+1.0.1.34:
+
+  Fixed #243 (Pdplayer 64 cannot save an uncompressed AVI)
+
+1.0.1.33:
+
+  Color Key added (#229) (found in the Effects tab of the property panel)
+
+1.0.1.32:
+
+  Improved handling of AVI files.
+
+  Fixed #197 (Save Layer as sequence doesn't respect the crop rectangle)
+
+  Softimage PIC support (#188)
+
+  E-mail screen or frame as PNG no longer includes an alpha channel  
+  Bluefish444 output no longer contains alpha
+
+1.0.1.31:
+
+  Fixed #196 (Invert Color doesn't work on adjustment layers)
+  Fixed #191 (Locate in Explorer doesn't work when the path contains both \ and /)
+  Fixed #210 (Resizing a layer leaves the crop rectangle with the old size)
+
+  Implemented #222 (New Brush Layer should skip text layers and size itself to the image beneath)
+
+  New Composition now resets the background, frame rate, zoom, pan, aspect (#206)
+  --lookup_table=default now resets the lookup table, same as --lookup_table="" (#225)
+  Shift+double click on a text layer now brings up the edit text dialog (#224)
+  --layer_toggle_difference added, with shortcut D (#226)
+  "Do not save alpha channel" option added when saving images (#122)
+
+1.0.1.30:
+
+  Video layer added (#7).
+
+1.0.1.29:
+
+  Pdplayer can now use 3D lookup tables. The supported formats are Autodesk .3dl,
+  Nucoda .cms and Iridas .cube. .3dl tables are assumed to have 12 bits of output
+  (range 0..4095). .3dl and .cube are assumed to contain sRGB values by default,
+  whereas .cms is assumed to be linear.
+
+  As a result of the changes, the option "Linear Cineon" has been removed. The
+  same effect may be achieved by using the supplied "identity.lut" 1D table, found
+  in the LUTs subfolder of the installation directory. In the same place one can
+  find a 1D lookup table for viewing Panalog DPX files, named "panalog.cms".
+
+1.0.1.28:
+
+  Text layer added (#4).
+
+1.0.1.27:
+
+  TIFF is now supported as an export format (#199).
+
+1.0.1.26:
+
+  Files with '#' in the name such as img#001.jpg are now supported (#198)
+
+1.0.1.25:
+
+  Added copy/paste for color corrections.
+
+1.0.1.24:
+
+  Improved audio quality.
+
+1.0.1.23:
+
+  Fixed #184 (Opening a composition and adding layers to it leads to duplicate track identifiers)
+  Added --update_all_layers (shortcut F5) (#179)
+  Added --length=K to set layer length in frames (#176)
+  Added layer copy/paste (#182)
+
+1.0.1.22:
+
+  Preloading a layer now doesn't cancel a previous preload (#178)
+  The free memory indicator is more accurate for Pdplayer 32 bit under 64 bit Windows
+  Frames are more predictably evicted from cache
+
+1.0.1.21:
+
+  Fixed a rare x64-specific issue with some odd combinations of flip, position and zoom (#180)
+
+1.0.1.20:
+
+  Fixed missing alpha channel for 16 bit TIFF images (#177)
+
+1.0.1.19:
+
+  Fixed audio issues with more than one audio layer (#175)
+
+1.0.1.18:
+
+  --transient added
+  Crop area is now easier to target (#134)
+  Fixed .nk export to apply gamma after lift/gain
+
+1.0.1.17:
+
+  x64 fixes.
+
+1.0.1.16:
+
+  Added --layer_position_after, --timeline_fit_all_layers, --timeline_trim_to_workarea (#154, #155, #156)
+  Added --still_image, which export to pdpcmd now uses (#158)
+  Audio is now started if a WAV file is passed on the command line (#157)
+  Frame number and key code are read from CIN files
+  --toggle_layer_stack added (shortcut Q or double click at the edge) (#164)
+
+1.0.1.15:
+
+  1D look-up table support (#83)
+
+1.0.1.14:
+
+  Double-click on the mask size allows one to enter a custom mask (#137)
+  "Apply aspect to mask" now applies pan and zoom as well (#86)
+
+1.0.1.13:
+
+  Alternative slider drag speed is now activated with Alt+drag instead of Shift+drag
+  Decreased the default drag speed of lift/gamma/gain for finer control
+
+1.0.1.12:
+
+  The frame/timecode indicator now has four more settings: (#153)
+  - Frame from name
+  - Embedded frame number
+  - Embedded time code
+  - Embedded edge/key code
+
+  Frame number, time code and edge code are read from DPX files
+  Frame number is read from RLA files
+  Time code and key code are read from EXR files
+
+1.0.1.11:
+
+  .vrimg support added (#139)
+  Improved handling of some malformed AVI files (#147)
+  Color controls changed to handle negative (darker than black) colors better
+  In particular, the gamma is now applied after lift+gain
+
+1.0.1.10:
+
+  Somewhat improved network load speed for JPEG images
+  menu.py should now work on Win64, and with Nuke 5.1
+
+1.0.1.9: Improved network load speed for TGA and SGI images
+1.0.1.8: Better RPF depth channel range estimation

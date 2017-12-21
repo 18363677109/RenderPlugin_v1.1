@@ -1,0 +1,177 @@
+ctrl+del	layer_delete_selected
+
+shift+pgup	layer_select_up
+shift+pgdn	layer_select_down
+shift+home	layer_select_first
+shift+end	layer_select_last
+
+esc		layer_select_none
+
+left		prev_frame
+right		next_frame
+
+home		first_frame
+end		last_frame
+
+enter		toggle_pause
+return		toggle_pause
+space		toggle_pause
+
+down		play_backward
+,		play_backward
+
+up		play_forward
+.		play_forward
+
+numpad*		increase_fps
+numpad/		decrease_fps
+
+alt+home	workarea_set_begin
+alt+end		workarea_set_end
+
+i		layer_go_to_in
+o		layer_go_to_out
+
+shift+i		layer_set_in_at_current
+shift+o		layer_set_out_at_current
+
+b		channel_b
+g		channel_g
+r		channel_r
+a		channel_a
+l		channel_l
+z		channel_z
+
+shift+b		channel_b_mode
+shift+g		channel_g_mode
+shift+r		channel_r_mode
+
+[		layer_align_in
+]		layer_align_out
+
+alt+[		layer_set_in_at_current
+alt+]		layer_set_out_at_current
+
+alt+left	layer_shift_left
+alt+right	layer_shift_right
+alt+up		layer_move_selected_up
+alt+down	layer_move_selected_down
+
+numpad5		reset_pan_and_zoom
+ctrl+numpad5	reset_layer_position
+
+numpad+		increase_zoom_factor
+numpad-		decrease_zoom_factor
+
+ctrl+numpad+	increase_zoom_factor timeline_visible=0 resize_window_to_fit
+ctrl+numpad-	decrease_zoom_factor timeline_visible=0 resize_window_to_fit
+
+shift+left	layer_move_left
+shift+right	layer_move_right
+shift+up	layer_move_up
+shift+down	layer_move_down
+
+shift+a		workarea_set_to_selection
+
+ctrl+shift+h	http_start
+
+f11		toggle_fullscreen
+tab		toggle_timeline
+
+f12		toggle_fullscreen
+
+ctrl+shift+left		layer_half_width_left
+ctrl+shift+right	layer_half_width_right
+ctrl+shift+up		layer_half_height_up
+ctrl+shift+down		layer_half_height_down
+
+shift+d		layer_duplicate
+ctrl+shift+d	layer_duplicate_and_split
+
+\		toggle_property_panel
+
+ctrl+m		mail_screen_as_jpeg
+ctrl+shift+m	mail_frame_as_jpeg
+
+ctrl+v		clipboard_paste
+ctrl+shift+v	clipboard_paste_frame
+ctrl+alt+v	clipboard_paste_image
+
+ctrl+c		clipboard_copy_layer
+ctrl+shift+c	clipboard_copy_mask
+ctrl+alt+c	clipboard_copy_screen
+
+ctrl+shift+l	locate_in_explorer
+ctrl+shift+w	open_with
+
+f8		resize_window_to_fit
+
+~		toggle_infobar
+
+ctrl+l		add_layer
+
+u		layer_update_frame
+shift+u		layer_update_modified
+ctrl+shift+u	layer_toggle_autoupdate
+
+f3		layer_replace_with_previous
+f4		layer_replace_with_next
+
+ctrl+n		new_composition
+ctrl+o		open_composition
+ctrl+s		save_composition
+ctrl+shift+s	save_composition_as
+
+m		layer_flip_x
+shift+m		layer_flip_y
+
+shift+c		layer_toggle_disable_cc
+c		layer_toggle_disable_cc
+
+shift+v		layer_toggle_visible
+v		layer_toggle_visible
+
+ctrl+shift+z	undo
+ctrl+z		undo
+
+shift+k		layer_toggle_crop
+k		layer_toggle_crop
+
+shift+space	layer_preload_into_cache
+shift+esc	cache_stop_preload
+
+/		toggle_pv_tooltip
+q		toggle_layer_stack
+
+f5		update_all_layers
+
+ctrl+t		new_text_layer
+
+d		layer_toggle_difference
+
+shift+alt+left	target_view=left
+shift+alt+right	target_view=right
+shift+alt+down	target_view=both
+
+ctrl+alt+left	stereo_view=left
+ctrl+alt+right	stereo_view=right
+ctrl+alt+down	stereo_view=both
+
+ctrl+alt+up	switch_stereo_views
+
+ctrl+a		layer_select_all
+
+ctrl+g		layer_assign_group
+ctrl+shift+g	layer_assign_group
+
+ctrl+j		new_adjustment_layer
+
+ctrl+1		zoom=100
+ctrl+2		zoom=200
+ctrl+3		zoom=300
+ctrl+4		zoom=400
+ctrl+0		zoom=50
+ctrl+9		zoom=25
+ctrl+8		zoom=12
+
+ctrl+r		layer_position_after

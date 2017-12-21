@@ -1,0 +1,10 @@
+global proc EvalRenderTool(){
+    global string $myPath;
+    string $myPath = "T:/BL_Mid/xXx/RenderPlugin";
+    eval ("source  \"" + $myPath + "/Scripts/RenderTool.mel\";");
+    python ("execfile('" + $myPath + "/Scripts/AutoLayer.py')");
+    python ("execfile('" + $myPath + "/Scripts/SetRGB.py')");
+    python ("execfile('" + $myPath + "/Pdplayer/pdplayer64.exe')");
+}
+
+EvalRenderTool()

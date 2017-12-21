@@ -1,0 +1,1077 @@
+System
+------
+
+--attach
+
+  Attach to an existing Pdplayer and pass it the rest of the command line
+
+--cmdfile=filename.txt
+
+  Execute the commands from filename.txt
+
+--transient, --transient={0,1}
+
+  Start Pdplayer in transient mode, that is, do not save settings on exit
+
+Global Properties
+-----------------
+
+--back_color={black,dark_grey,green,blue,magenta,white,transparent}
+--back_color=255,128,128
+
+  Set background color
+
+--safe_area={none,blue,orange}
+
+  Set safe area type
+
+--mask_type={none,transparent,crop,crop_safe}
+
+  Set mask type
+
+--mask_size=720,576
+--mask_size=layer
+
+  Set mask size
+
+--grid={0,1}
+
+  Turn grid on or off
+
+--counter={frame, timecode, frame_from_name, embedded_frame, embedded_timecode, embedded_keycode}
+
+  Set counter type
+
+--repeat_type={none,ping_pong,loop}
+
+  Set repeat type
+
+--fps=29.97
+
+  Set fps
+
+--timeline=140
+
+  Set the timeline length in frames
+
+--wa_begin=10
+
+  Set work area start frame
+
+--wa_end=120
+
+  Set work area end frame
+
+--time=7
+
+  Set current time
+
+--zoom=250
+
+  Set zoom (in percents)
+
+--pan=0,0
+
+  Set pan position
+
+--frame_base={0,1}
+
+  Set frame base (whether frames start from 0 or from 1)
+
+--ext_device={decklink,firewire,vtoaster,bluefish}
+
+  Set external output type
+
+--selected_layer=4
+
+  Select the specified track/layer
+
+--pp_visible={0,1}
+
+  Set whether the property panel is visible
+
+--pp_position=0.02,0.98
+
+  Set the position of the property panel in 0.0-1.0 coordinates
+
+--infobar_visible={0,1}
+
+  Set infobar visibility
+
+--window_size=1280,720
+
+  Set window size
+
+--http_port=80
+
+  Set HTTP server port
+
+--always_on_top={0,1}
+
+  Set the always on top property for the window
+
+--brush_size=10
+--brush_softness=25
+--brush_spacing=5
+--brush_color=255,255,255
+--brush_opacity=100
+
+  Set brush size, softness, spacing, color, or opacity.
+
+--global_aspect=1.067
+
+  Set global pixel aspect
+
+--timeline_visible={0,1}
+
+  Set whether the timeline is visible
+
+--pv_tooltip_enabled={0,1}
+
+  Enables/disables the preview area tooltip
+
+--spb_enabled={0,1}
+
+  Enables/disables the secondary playback buttons
+
+--automatic_preload={0,1}
+
+  Enables or disables the automatic preload
+
+--always_on_top={0,1}
+
+  Enables or disables the always on top mode
+
+--apply_transforms_to_mask={0,1}
+
+  Controls whether pan, zoom and global aspect are applied to the mask
+
+--stereo_view={left,right,both|stereo}
+
+  Displays the left view, the right view, or a stereo view
+
+--stereo_mode={anaglyph,anaglyph_gm,interlaced,checkerboard}
+
+  Sets the stereo mode to anaglyph, green/magenta anaglyph, interlaced, or checkerboard
+
+--switch_stereo_views={0,1}
+
+  Switches the left and right view
+
+--pp_tab={color,placement,blending,brush,text,effects,source,r3d}
+
+  Sets the active tab of the property panel
+
+--global_volume=0..100
+
+  Set the global audio volume
+
+
+
+Layer Properties
+----------------
+
+--fcheck
+
+  Use Maya Fcheck naming - # is replaced by ####, @ is replaced by #. Must
+  immediately follow the file name and precede --range, --still_image or
+  --force_sequence, if given.
+
+--range=1-10,12,13,20-80/2 (first-last/step)
+
+  Select a range of frames from a sequence. Must immediately follow the file
+  name, or --fcheck, if present.
+  Example: pdplayer.exe d:\footage\sequence.####.tga --range=1-200/2
+
+--still_image
+
+  Add a still image layer instead of autodetecting a sequence. Must immediately
+  follow the file name, or --fcheck, if present.
+
+--force_sequence
+
+  Add a sequence layer, even if the file doesn't exist or the sequence has a
+  single frame. Must immediately follow the file name, or --fcheck, if present.
+
+--begin=8
+
+  Set layer starting frame on the timeline
+
+--length=25
+
+  Set layer length in frames
+
+--in_point=4
+
+  Set layer in point
+
+--out_point=84
+
+  Set layer out point
+
+--name=foo
+
+  Set layer name
+
+--position=0,0
+
+  Set layer position
+
+--alpha={ignore,normal,pm,mask}
+
+  Set layer alpha mode
+
+--blend={normal,add,multiply,screen,difference}
+
+  Set layer blend mode
+
+--depth={ignore,replace,combine}
+
+  Set layer depth mode
+
+--opacity=0..100
+
+  Set layer opacity
+
+--invert_color=0,1
+
+  Invert layer color
+
+--invert_alpha=0,1
+
+  Invert layer alpha
+
+--invert_depth=0,1
+
+  Invert layer depth
+
+--color_space={default,linear,srgb|sRGB}
+
+  Set layer color space
+
+--lookup_table=filename
+
+  Set layer lookup table
+
+--lookup_table=default, --lookup_table=""
+
+  Reset layer lookup table to default
+
+--exposure=2.4
+
+  Set layer exposure
+
+--soft_clip=3.1
+
+  Set layer soft clip
+
+--lift=0.14, --lift_r=-0.01
+
+  Set layer lift; --lift_r, --lift_g, --lift_b are per channel
+
+--gamma=1.4, --gamma_r=1.8
+
+  Set layer gamma; --gamma_r, --gamma_g, --gamma_b are per channel
+
+--gain=1.2, --gain_r=0.8
+
+  Set layer gain; --gain_r, --gain_g, --gain_b are per channel
+
+--brightness=-0.1
+
+  Set layer brightness
+
+--contrast=0.4
+
+  Set layer contrast
+
+--hue=180
+
+  Set layer hue shift
+
+--saturation=-8
+
+  Set layer saturation shift
+
+--disable_cc=0,1
+
+  Disable color corrections
+
+--auto_update=0,1
+
+  Set layer auto update mode
+
+--disable_caching=0,1
+
+  Disable caching for this layer
+
+--pixel_aspect=1.067
+
+  Set layer pixel aspect
+
+--scale=150
+--scale_x=150
+--scale_y=150
+
+  Set layer scale
+
+--flip_x={0,1}
+--filp_y={0,1}
+
+  Flip layer horizontally or vertically
+
+--border=255,255,255
+--border=none
+
+  Set layer border
+
+--border={0,1}
+
+  Enable/disable layer border
+
+--crop=X,Y,W,H
+--crop=none
+--crop={left_half,right_half,top_half,bottom_half}
+
+  Set layer crop rectangle
+
+--text=0,0,"Lorem ipsum"
+
+  Set layer text to "Lorem ipsum".
+
+--text_align_x={left,center,right}
+
+  Set horizontal text alignment.
+
+--text_align_y={top,center/middle,bottom}
+
+  Set vertical text alignment.
+
+--text_font="Times New Roman"
+
+  Set text font to "Times New Roman".
+
+--text_size=18
+
+  Set text size to 18px.
+
+--text_bold={0,1}
+
+  Set whether the text is bold.
+
+--text_italic={0,1}
+
+  Set whether the text is italic.
+
+--text_color=R,G,B
+
+  Set text color.
+
+--text_outline_color=R,G,B; --text_outline_color=none
+
+  Set text outline color.
+
+--text_shadow_color=R,G,B; --text_shadow_color=none
+
+  Set text shadow color.
+
+--text_back_color=A,R,G,B; --text_back_color=none
+
+  Set text background color. A is the alpha and controls the opacity.
+
+--primary_key=R,G,B,S,T
+--primary_key=none
+--secondary_key=R,G,B,S,T
+--secondary_key=none
+
+  Set primary or secondary color key to (R, G, B), slope S, tolerance T.
+
+--fade_in=15
+--fade_out=15
+
+  Set fade in or fade out portion, in frames
+
+--image_layer="Diffuse"
+
+  Set the image layer by name
+
+--image_layer=""
+
+  Reset the image layer to the default
+  
+--image_layer_index=5
+
+  Set the image layer by index
+
+--target_view={left,right,both}
+
+  Set the target view
+
+--layer_safe_area={0,1}
+
+  Enable/disable the per-layer safe area
+  
+--border_color=R,G,B
+
+  Set the layer border/safe area color (without enabling the border)
+
+--layer_channels={r_grayscale,r_color,r_hidden,g_grayscale,g_color,g_hidden,
+  b_grayscale,b_color,b_hidden,rgb,alpha,luma,depth}
+
+  Set the layer channnels
+
+--group_id=8
+
+  Set the layer group ID
+
+--alpha_source=0..N
+
+  Set the layer alpha source
+
+--alpha_source_channel={red,green,blue,alpha,luma}
+
+  Set the layer alpha source channel
+
+--alpha_source_invert=0/1
+
+  Set whether the layer alpha source should be inverted
+
+--alpha_source_stretch=0/1
+
+  Set whether the layer alpha source should be stretched to fit
+
+--alpha_source_mode={replace,combine,multiply}
+
+  Set the alpha source mode
+
+--alpha_source_channel2={red,green,blue,alpha,luma}
+
+  Set the channel that is the second argument of the combine or multiply mode
+
+--volume=0..100
+
+  Set layer audio volume
+
+
+
+Commands
+--------
+
+  Note: while the commands in this section can be used from the command line,
+  their primary purpose is to be bound to keys using pdplayer.keydefs.txt (where
+  they are not preceded by --.) The reverse is also true; while the options in the
+  preceding two sections are intended to be used from the command line, they can
+  too be bound to a hot key, again, not preceded by --. 
+
+--layer_delete_selected
+
+  Delete selected layer
+
+--layer_delete_all
+
+  Delete all layers
+
+--layer_select_up
+
+  Select previous layer
+
+--layer_select_down
+
+  Select next layer
+
+--layer_select_first
+
+  Select first layer
+
+--layer_select_last
+
+  Select last layer
+
+--layer_select_none
+
+  Select no layer
+
+--layer_move_selected_up
+
+  Move selected layer up in Z-order
+
+--layer_move_selected_down
+
+  Move selected layer down in Z-order
+
+--play_forward
+
+  Start playing forward, or pause if already playing forward
+
+--play_backward
+
+  Start playing backward, or pause if already playing backward
+
+--toggle_pause
+
+  Pause or resume playing if already paused
+
+--reverse_playback_direction
+
+  Reverse playback direction
+
+--first_frame
+
+  Go to first work area frame
+
+--next_frame
+
+  Advance one frame
+
+--prev_frame
+
+  Go back one frame
+
+--last_frame
+
+  Go to the last work area frame
+
+--toggle_repeat
+
+  Toggle repeat mode
+
+--increase_fps
+
+  Increase frames per second
+
+--decrease_fps
+
+  Decrease frames per second
+
+--workarea_set_begin
+
+  Set work area beginning at the current frame
+
+--workarea_set_end
+
+  Set work area end at the current frame
+
+--layer_go_to_begin
+
+  Go to layer start
+
+--layer_go_to_end
+
+  Go to layer end
+
+--layer_go_to_in
+
+  Go to layer in point
+
+--layer_go_to_out
+
+  Go to layer out point
+
+--layer_align_begin
+
+  Align layer start at current frame
+
+--layer_align_end
+
+  Align layer end at current frame
+
+--layer_align_in
+
+  Align layer in point at current frame
+
+--layer_align_out
+
+  Align layer out point at current frame
+
+--layer_shift_left
+
+  Shift layer left one frame
+
+--layer_shift_right
+
+  Shift layer right one frame
+
+--increase_zoom_factor
+
+  Increase zoom factor
+
+--decrease_zoom_factor
+
+  Decrease zoom factor
+
+--reset_zoom_factor
+
+  Reset zoom factor
+
+--reset_pan_position
+
+  Reset pan position
+
+--reset_pan_and_zoom
+
+  Reset pan and zoom, or zoom to fit window if already reset
+
+--reset_layer_position
+
+  Reset the position of the selected layer to 0,0
+
+--layer_move_left
+
+  Nudge the selected layer one pixel to the left
+
+--layer_move_right
+
+  Nudge the selected layer one pixel to the right
+
+--layer_move_up
+
+  Nudge the selected layer one pixel up
+
+--layer_move_down
+
+  Nudge the selected layer one pixel down
+
+--layer_set_in_at_current
+
+  Set the in point of the selected layer at the current frame
+
+--layer_set_out_at_current
+
+  Set the out point of the selected layer at the current frame
+
+--workarea_set_to_selection
+
+  Set the work area to the in/out points of the selected layer
+
+--channel_b
+
+  Toggle blue channel display between RGBA, grayscale, blue, or hidden
+
+--channel_g
+
+  Toggle green channel display
+
+--channel_r
+
+  Toggle red channel display
+
+--channel_a
+
+  Toggle alpha channel
+
+--channel_l
+
+  Toggle luma
+
+--channel_z
+
+  Toggle depth channel
+
+--toggle_timeline
+
+  Toggle the timeline
+
+--layer_half_width_left
+
+  Move selected layer half width to the left
+
+--layer_half_width_right
+
+  Move selected layer half width to the right
+
+--layer_half_height_up
+
+  Move selected layer half height up
+
+--layer_half_height_down
+
+  Move selected layer half height down
+
+--layer_duplicate
+
+  Duplicate current layer
+
+--layer_duplicate_and_split
+
+  Duplicate current layer, splitting it at the current frame
+
+--layer_remove_from_cache
+
+  Remove selected layer from cache
+
+--layer_toggle_disablecache
+
+  Toggle caching for the selected layer
+
+--layer_toggle_autoupdate
+
+  Toggle automatic update for the selected layer
+
+--toggle_property_panel
+
+  Toggle the layer property panel
+
+--toggle_mask
+
+  Toggle mask
+
+--toggle_grid
+
+  Toggle grid
+
+--toggle_vsync
+
+  Toggle display synchronization
+
+--layer_rescan_sequence
+
+  Rescan the sequence of the selected layer, looking for new or removed frames
+
+--toggle_infobar
+
+  Toggle the infobar
+
+--http_start
+
+  Start HTTP server
+
+--http_stop
+
+  Stop HTTP server
+
+--http_toggle
+
+  Toggle HTTP server
+
+--cache_clear
+
+  Clear all cache
+
+--toggle_fullscreen
+
+  Toggle full screen mode
+
+--mail_screen_as_jpeg
+
+  E-mail screenshot as JPEG
+
+--mail_screen_as_png
+
+  E-mail screenshot as PNG
+
+--mail_mask_as_jpeg
+
+  E-mail the contents of the current mask as JPEG
+
+--mail_mask_as_png
+
+  E-mail the contents of the current mask as PNG
+
+--mail_frame_as_jpeg
+
+  E-mail the current frame of the selected layer as JPEG
+
+--mail_frame_as_png
+
+  E-mail the current frame of the selected layer as PNG
+
+--clipboard_paste
+
+  Paste the contents of the clipboard as a new layer
+
+--clipboard_paste_frame
+
+  Paste the contents of the clipboard as a new single frame layer
+
+--clipboard_paste_image
+
+  Paste the image on the clipboard as a new clipboard layer, ignoring other formats
+
+--clipboard_copy_layer
+
+  Copy the current frame of the selected layer to the clipboard
+
+--clipboard_copy_mask
+
+  Copy an image of the mask contents to the clipboard
+
+--clipboard_copy_screen
+
+  Copy an image of the window contents to the clipboard
+
+--clipboard_copy_layer_as_nk
+
+  Copy the the selected layer to the clipboard as a Nuke script
+
+--locate_in_explorer
+
+  Open Windows Explorer on the current frame of the selected layer
+
+--open_with
+
+  Show the "Open With..." dialog for the current frame of the selected layer
+
+--resize_window_to_fit
+
+  Resize the Pdplayer window to fit the visible layers
+
+--add_layer
+
+  Open the Add Layer dialog
+
+--save_screen_as
+
+  Open the Save Screen As dialog
+
+--save_frame_as
+
+  Open the Save Frame As dialog
+
+--save_frame_as=filename
+
+  Save the current frame as 'filename'
+
+--exit
+
+  Exit Pdplayer
+
+--layer_update_frame
+
+  Update current frame
+
+--layer_update_modified
+
+  Remove modified frames from cache
+
+--layer_replace_with_previous
+
+  Replace an image layer with the previous image in the directory
+
+--layer_replace_with_next
+
+  Replace an image layer with the next image in the directory
+
+--layer_replace_with
+
+  Open the Replace with... dialog and replace the current layer
+
+--layer_replace_with=filename
+
+  Replace the current layer with 'filename'
+
+--layer_replace_with_image=filename
+
+  Replace the current layer with 'filename', treating it as a still image
+
+--layer_flip_x
+--layer_flip_y
+
+  Flip layer horizontally or vertically
+
+--layer_toggle_visible
+
+  Toggle layer visibility
+
+--layer_toggle_disable_cc
+
+  Disable/enable layer color corrections
+
+--new_adjustment_layer
+--new_adjustment_layer=W,H,L
+
+  Adds a new adjustment layer (with the specified width, height, and length)
+
+--new_brush_layer
+--new_brush_layer=W,H,L
+
+  Adds a new brush layer
+
+--new_brush_sequence_layer
+--new_brush_sequence_layer=W,H,L
+
+  Adds a new brush sequence layer
+
+--new_text_layer
+--new_text_layer=W,H,L
+
+  Adds a new text layer
+
+--save_mask_as_image
+
+  Opens the "Save Mask as Image" dialog
+
+--save_mask_as_image=filename
+
+  Saves the current mask as 'filename'
+
+--save_mask_as_sequence
+
+  Opens the "Save Mask as Sequence" dialog
+
+--save_mask_as_sequence=file.ext,codec,quality
+
+  Saves the current mask as a sequence or a movie. The parameters are optional.
+  For AVI or Quicktime, the available values for 'codec' can be seen in the Save Mask As dialog.
+  For TGA images, 'codec' can be 'none' or 'rle'.
+  'quality' can be a value between 1 and 100, or one of lowest, low, normal, high, best.
+  For Quicktime, an optional "pcm" argument at the end means to not compress audio.
+
+  Examples:
+
+  --save_mask_as_sequence=seq.tga
+  --save_mask_as_sequence=seq.tga,rle
+
+  --save_mask_as_sequence=seq.jpeg
+  --save_mask_as_sequence=seq.jpeg,,95
+
+  --save_mask_as_sequence=uncompressed.avi
+  --save_mask_as_sequence=xvid.avi,xvid
+
+  --save_mask_as_sequence=uncompressed.mov,raw
+  --save_mask_as_sequence=h264.mov,avc1
+  --save_mask_as_sequence=h264.mov,avc1,high
+  --save_mask_as_sequence=dv.mov,dvsp,high,pcm
+
+--save_layer_as
+
+  Opens the "Save Layer as" dialog
+
+--save_layer_as=file.ext,codec,quality
+
+  Saves the current layer as a sequence or a movie.
+
+--clear_canvas
+
+  Clear layer canvas
+
+--layer_toggle_crop
+
+  Enable/disable layer crop rectangle
+
+--layer_resize_to_timeline
+
+  Resizes a single-frame layer to cover the timeline
+
+--layer_resize_to_workarea
+
+  Resizes a single-frame layer to cover the work area
+
+--layer_preload_into_cache
+
+  Preload the selected layer into the cache
+
+--toggle_automatic_preload
+
+  Toggles the automatic preload
+
+--toggle_pv_tooltip
+
+  Toggles the preview area tooltip
+
+--save_composition_as
+
+  Open the Save Composition As dialog
+
+--save_composition_as=filename
+
+  Saves the current composition as 'filename'
+
+--save_composition
+
+  Saves the current composition
+
+--open_composition
+
+  Open the Open Composition dialog
+
+--new_composition
+
+  Discards the current composition
+
+--toggle_always_on_top
+
+  Toggles the always on top mode
+
+--export_composition_as
+
+  Open the Export Composition As dialog
+
+--cache_stop_preload
+
+  Stops preloading a layer
+
+--add_recent_layer=K
+
+  Add the recent layer with index K (starting from 1) as if chosen from the Add Recent menu
+
+--timeline_fit_all_layers
+
+  Resize timeline to fit all layers
+
+--timeline_trim_to_workarea
+
+  Trim timeline to work area
+
+--layer_position_after
+
+  Position the in point of the selected layer at the out point of the layer beneath
+
+--toggle_layer_stack
+
+  Toggle layer stack
+
+--update_all_layers
+
+  Update all layers as if by using --layer_update_frame and --layer_update_modified on each
+
+--layer_toggle_difference
+
+  Toggle the blend mode of the selected layer between Normal and Difference
+
+--preload_all_layers
+
+  Preload all layers into cache
+
+--embed_layer
+
+  Embed a still image or an audio layer into the composition
+
+--switch_stereo_views
+
+  Switch the left and right view
+
+--expand_into_layers
+
+  Expand the current layer into its corresponding image layers
+
+--layer_select_all
+
+  Select all layers
+
+--add_other_stereo_view
+
+  Add the other stereo view
+
+--layer_select_group
+
+  Selects all layers that share a group ID with the selected
+
+--layer_assign_group
+
+  Synthesize a unique group ID and assign it to the selected layers
+
+--pp_next_tab
+--pp_prev_tab
+
+  Selects the next or previous tab of the property panel
+
+--layer_resize_to_mask
+
+  Resize selected layer to mask
+
+--layer_align_to_mask={left,center,right,top,middle,bottom}[,offset]
+
+  Align layer to a mask edge or center, with an optional integer offset
+
+  Example: --layer_align_to_mask=left aligns the left edge of the layer with the left edge of the mask
+

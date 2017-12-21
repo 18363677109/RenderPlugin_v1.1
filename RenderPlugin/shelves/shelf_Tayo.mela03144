@@ -1,0 +1,289 @@
+global proc shelf_Tayo () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 33
+        -height 33
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -align "center" 
+        -label "User Script" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "T:/Tayo/03_Pre-production/04_MelScript/Manager/Icon/tayo_manager.jpg" 
+        -image1 "T:/Tayo/03_Pre-production/04_MelScript/Manager/Icon/tayo_manager.jpg" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "source \"T:/Tayo/03_Pre-production/04_MelScript/Manager/Tayo.mel\";\nManager();" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "import maya.cmds as cmds\nfind = cmds.ls(sl = True)\nlist = cmds.listConnections(find[0])\ndelList = []\nfor li in list:\n    if (find[0] in li):\n        delList.append(li)\n        \ncmds.delete (delList)" 
+        -enableBackground 0
+        -align "center" 
+        -label "import maya.cmds as cmds\nfind = cmds.ls(sl = True)\nlist = cmds.l..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "pythonFamily.png" 
+        -image1 "pythonFamily.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import maya.cmds as cmds\nfind = cmds.ls(sl = True)\nlist = cmds.listConnections(find[0])\ndelList = []\nfor li in list:\n    if (find[0] in li):\n        delList.append(li)\n        \ncmds.delete (delList)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "import maya.cmds as cmds\nfind = cmds.ls(sl = True)\nlist = cmds.listConnections(find[0])\ndelList = []\nfor li in list:\n    if ('blendWeighted' in li):\n        delList.append(li)\n        \ncmds.delete (delList)" 
+        -enableBackground 0
+        -align "center" 
+        -label "import maya.cmds as cmds\nfind = cmds.ls(sl = True)\nlist = cmds.l..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "pythonFamily.png" 
+        -image1 "pythonFamily.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import maya.cmds as cmds\nfind = cmds.ls(sl = True)\nlist = cmds.listConnections(find[0])\ndelList = []\nfor li in list:\n    if ('blendWeighted' in li):\n        delList.append(li)\n        \ncmds.delete (delList)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -align "center" 
+        -label "User Script" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "Gani" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -r Gani_root T3P_Gani_in_set_mb_P;\npointConstraint -offset 0 0 0 -weight 1;\norientConstraint -offset 0 0 0 -weight 1;\n" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -align "center" 
+        -label "User Script" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "Lani" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -r Lani_root T3P_Lani_in_set_mb_P;\npointConstraint -offset 0 0 0 -weight 1;\norientConstraint -offset 0 0 0 -weight 1;\n" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -align "center" 
+        -label "User Script" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "Nuri" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -r Nuri_root T3P_Nuri_in_set_mb_P;\npointConstraint -offset 0 0 0 -weight 1;\norientConstraint -offset 0 0 0 -weight 1;\n" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -align "center" 
+        -label "User Script" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "Rogi" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -r Rogi_root T3P_Rogi_in_set_mb_P;\npointConstraint -offset 0 0 0 -weight 1;\norientConstraint -offset 0 0 0 -weight 1;\n" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "User Script" 
+        -enableBackground 0
+        -align "center" 
+        -label "User Script" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "Tayo" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "commandButton.png" 
+        -image1 "commandButton.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "select -r Tayo_root T3P_Tayo_in_set_mb_P;\npointConstraint -offset 0 0 0 -weight 1;\norientConstraint -offset 0 0 0 -weight 1;\n" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Convert selected components to selected vertex component" 
+        -enableBackground 0
+        -align "center" 
+        -label "To Vertices" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "polyConvertToVertices.png" 
+        -image1 "polyConvertToVertices.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "ConvertSelectionToVertices" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Non-linear character animation editor" 
+        -enableBackground 0
+        -align "center" 
+        -label "Trax Editor" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "TE" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -image "menuIconWindow.png" 
+        -image1 "menuIconWindow.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "CharacterAnimationEditor" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "# -*- coding: utf-8 -*-\nimport maya.cmds as cmds\nimport os\n\ndef TransferCtrl():\n    '''创建界面'''\n\n    if cmds.window('TC_Window', ex = 1):\n        cmds.deleteUI('TC_Window')\n\n    cmds.window('TC_Window', s = 0, t = 'TransferCtrl')\n    cmds.columnLayout(adj = 1, w = 300)\n    cmds.button('设置目标对象', h = 35, c = 'TransferTarget(cmds.ls(sl = 1, tr = 1))')\n    cmds.button('移动当前对象', h = 35, c = 'TransferMove(cmds.ls(sl = 1, tr = 1))')\n    cmds.button('清除当前数据', h = 35, c = 'TransferTarget([])')\n    cmds.rowColumnLayout(nr = 1)\n    cmds.checkBox('TC_CheckT', l = '位移', v = 1)\n    cmds.checkBox('TC_CheckR', l = '旋转', v = 1)\n    cmds.checkBox('TC_CheckS', l = '缩放', v = 1)\n    cmds.checkBox('TC_CheckO', l = '其它', v = 1)\n    cmds.setParent('..')\n    cmds.setParent('..')\n    cmds.showWindow('TC_Window')\n\ndef TransferTarget(Item = []):\n    '''设置目标对象'''\n\n    Data = '//TransferCtrl Data File%s%s' % (os.linesep,os.linesep)\n    if Item != []: \n        for i in xrange(len(Item)):\n            try:\n                len(cmds.listAttr(Item[i], k = 1, u = 1, w = 1, s = 1, se = 1))\n            except:\n                continue\n            else:\n                Data += '##%s%s' % (Item[i].split(':')[-1],os.linesep)\n                Attr = cmds.listAttr(Item[i], k = 1, u = 1, w = 1, s = 1, se = 1)\n                for j in xrange(len(Attr)):\n                    Value = cmds.getAttr(Item[i] + '.' + Attr[j])\n                    buffer = [Item[i].split(':')[-1], Attr[j], str(Value)]\n                    Data += '%s%s' % (' * '.join(buffer),os.linesep)\n                Data += os.linesep\n    Data += '//End'\n    Path = cmds.internalVar(utd = 1)\n    f = open(Path + '/temp.tc', 'w')\n    f.write(Data)\n    f.close\n\ndef TransferMove(Item):\n    '''移动当前对象'''\n\n    Path = cmds.internalVar(utd = 1)\n    f = open(Path + '/temp.tc', 'r')\n    a = []\n    while True:\n        line = f.readline()\n        if len(line) == 0:\n            break\n        elif line.startswith('//') or line.startswith(os.linesep):\n            continue\n        elif line.startswith('##'):\n            a.append(line[2:-len(os.linesep)])\n        else:\n            b = line[:-len(os.linesep)].strip().split('*')\n            b = [x.strip() for x in b if x != '']\n            NS = ''\n            for x in Item:\n                if ':' in x:\n                    NS = Item[0].split(':',1)[0]\n                    break\n            if NS == '':\n                if b[0] in Item and len(Item) > 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                if len(a) == 1 and len(Item) == 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n            else:\n                if len(Item) > 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                elif len(a) == 1 and len(Item) == 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n\nTransferCtrl()\n" 
+        -enableBackground 0
+        -align "center" 
+        -label "# -*- coding: utf-8 -*-\nimport maya.cmds as cmds\nimport os\n\ndef ..." 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.25 
+        -image "pythonFamily.png" 
+        -image1 "pythonFamily.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "# -*- coding: utf-8 -*-\nimport maya.cmds as cmds\nimport os\n\ndef TransferCtrl():\n    '''创建界面'''\n\n    if cmds.window('TC_Window', ex = 1):\n        cmds.deleteUI('TC_Window')\n\n    cmds.window('TC_Window', s = 0, t = 'TransferCtrl')\n    cmds.columnLayout(adj = 1, w = 300)\n    cmds.button('设置目标对象', h = 35, c = 'TransferTarget(cmds.ls(sl = 1, tr = 1))')\n    cmds.button('移动当前对象', h = 35, c = 'TransferMove(cmds.ls(sl = 1, tr = 1))')\n    cmds.button('清除当前数据', h = 35, c = 'TransferTarget([])')\n    cmds.rowColumnLayout(nr = 1)\n    cmds.checkBox('TC_CheckT', l = '位移', v = 1)\n    cmds.checkBox('TC_CheckR', l = '旋转', v = 1)\n    cmds.checkBox('TC_CheckS', l = '缩放', v = 1)\n    cmds.checkBox('TC_CheckO', l = '其它', v = 1)\n    cmds.setParent('..')\n    cmds.setParent('..')\n    cmds.showWindow('TC_Window')\n\ndef TransferTarget(Item = []):\n    '''设置目标对象'''\n\n    Data = '//TransferCtrl Data File%s%s' % (os.linesep,os.linesep)\n    if Item != []: \n        for i in xrange(len(Item)):\n            try:\n                len(cmds.listAttr(Item[i], k = 1, u = 1, w = 1, s = 1, se = 1))\n            except:\n                continue\n            else:\n                Data += '##%s%s' % (Item[i].split(':')[-1],os.linesep)\n                Attr = cmds.listAttr(Item[i], k = 1, u = 1, w = 1, s = 1, se = 1)\n                for j in xrange(len(Attr)):\n                    Value = cmds.getAttr(Item[i] + '.' + Attr[j])\n                    buffer = [Item[i].split(':')[-1], Attr[j], str(Value)]\n                    Data += '%s%s' % (' * '.join(buffer),os.linesep)\n                Data += os.linesep\n    Data += '//End'\n    Path = cmds.internalVar(utd = 1)\n    f = open(Path + '/temp.tc', 'w')\n    f.write(Data)\n    f.close\n\ndef TransferMove(Item):\n    '''移动当前对象'''\n\n    Path = cmds.internalVar(utd = 1)\n    f = open(Path + '/temp.tc', 'r')\n    a = []\n    while True:\n        line = f.readline()\n        if len(line) == 0:\n            break\n        elif line.startswith('//') or line.startswith(os.linesep):\n            continue\n        elif line.startswith('##'):\n            a.append(line[2:-len(os.linesep)])\n        else:\n            b = line[:-len(os.linesep)].strip().split('*')\n            b = [x.strip() for x in b if x != '']\n            NS = ''\n            for x in Item:\n                if ':' in x:\n                    NS = Item[0].split(':',1)[0]\n                    break\n            if NS == '':\n                if b[0] in Item and len(Item) > 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                if len(a) == 1 and len(Item) == 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n            else:\n                if len(Item) > 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(NS + ':' + b[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                elif len(a) == 1 and len(Item) == 1:\n                    if 'translate' in b[1] and cmds.checkBox('TC_CheckT', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'rotate' in b[1] and cmds.checkBox('TC_CheckR', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'scale' in b[1] and cmds.checkBox('TC_CheckS', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n                    elif 'translate' not in b[1] and 'rotate' not in b[1] and 'scale' not in b[1] and cmds.checkBox('TC_CheckO', q = 1, v = 1):\n                        try:\n                            cmds.setAttr(Item[0] + '.' + b[1],float(b[2]))\n                        except:\n                            continue\n\nTransferCtrl()\n" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+
+} 

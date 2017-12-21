@@ -1,0 +1,737 @@
+﻿track_max_mouse_handler=Drag the divider to change the number of tracks on screen; double click to toggle the layer stack
+track_max_mouse_handler_hidden=Double click to show the UI panel
+
+opt_channel_r=Toggle red channel; shift+click toggles mode between grayscale, red, or hidden
+opt_channel_g=Toggle green channel; shift+click toggles mode between grayscale, green, or hidden
+opt_channel_b=Toggle blue channel; shift+click toggles mode between grayscale, blue, or hidden
+opt_channel_a=Toggle alpha channel
+opt_channel_l=Toggle luma
+opt_channel_z=Toggle depth channel
+
+opt_properties=Show or hide layer properties
+
+opt_safe_area=Toggle safe area and mask; right click for options
+opt_grid=Toggle grid
+opt_transp_bg=Toggle between black and checkerboard background; right click for more options
+opt_vsync=Toggle display synchronization; right click for options
+
+opt_vsync_toggle=Synchronize Display
+opt_vsync_high_cpu=High CPU Use
+opt_vsync_low_cpu=Low CPU Use
+opt_vsync_notearing=Ask Video Driver to Avoid Tearing
+opt_vsync_waitvb=Wait for Vertical Blank
+opt_vsync_pollvb=Monitor Vertical Blank
+
+opt_resolution=Toggle the cache resolution between full, half and quarter (conserves memory)
+
+opt_audio=Toggle audio
+opt_http=Toggle web server on http://{1}:{2}/
+
+opt_http_copy_url=Copy '{1}' to Clipboard
+opt_http_open_in_browser=Open '{1}' in Browser
+
+opt_ext_generic=external
+
+opt_ext_turn_on=Enable {1} output at {2}x{3}, {4}.{5:02d}; right click to choose another device
+opt_ext_turn_off={1} output at {2}x{3}, {4}.{5:02d} is active; click to disable
+
+ext_device_decklink=Blackmagic Decklink
+ext_device_firewire=Firewire DV Camcorder/VTR
+ext_device_vtoaster=Newtek Video Toaster
+ext_device_bluefish=Bluefish444
+ext_device_secondary=Secondary Display
+ext_device_tertiary=Tertiary Display
+ext_device_aja_dshow=AJA DirectShow
+
+ext_alpha_none=No Alpha
+ext_alpha_internal=Internal Alpha
+ext_alpha_external=External Alpha
+
+ctrl_first_frame=First work area frame
+ctrl_prev_frame=Previous frame
+ctrl_play_backward=Play backward
+ctrl_play_forward=Play forward
+ctrl_next_frame=Next frame
+ctrl_last_frame=Last work area frame
+ctrl_repeat_mode=Toggle repeat mode between once, loop, and ping-pong
+
+
+tm_hotspot_0=Drag to change the beginning of the timeline, double click to fit all tracks; right-click to change the frame base
+tm_hotspot_n=Drag to change the end of the timeline; double click to fit all tracks
+tm_hotspot_f=Drag to change the beginning of the work area; double click to move to next in point
+tm_hotspot_l=Drag to change the end of the work area; double click to move to next out point
+tm_hotspot_t=Drag to change the current frame
+tm_hotspot_w=Work area: {1} frames
+tm_hotspot_w2=Middle-drag to move; left-drag to change the current frame
+tm_hotspot_a=Click or drag to change the current frame
+
+tm_fps_edit=Drag left/right, shift+drag or use the mouse wheel to change the current frame rate, double-click to enter a new value; right-click to select from list
+tm_fps_set_as_default=Set {1:.2f} as Default
+
+tm_n_edit=Double-click to enter a new timeline size; right-click for options
+tm_n_fit_layers=Fit All Layers
+tm_n_trim_to_wa=Trim to Work Area
+
+frame_base_0=First frame is 0
+frame_base_1=First frame is 1
+
+
+ta_hotspot_number=Click to select the current track
+ta_hotspot_visible=Click to show or hide the layer; use the mouse wheel to change its transparency
+ta_hotspot_effect=Right click to change the blend or alpha mode, or use the mouse wheel for the alpha
+ta_hotspot_background=Click to select the current track
+ta_hotspot_track_in=Drag to change the layer in point; double-click to reset to beginning
+ta_hotspot_track_body=Drag the layer to move or reorder it; middle-drag to move the in:out portion
+ta_hotspot_track_out=Drag to change the layer out point, drag beyond the end to create or add a loop; double-click to reset to closest loop
+
+
+ti_clipboard_image_name=Clipboard {1}
+ti_adjustment_name=Adjustment {1}
+ti_brush_name=Brush {1}
+ti_brush_sequence_name=Brush Sequence {1}
+ti_text_name=Text {1}
+ti_video_name=Video {1}
+
+ti_st_none=placeholder
+ti_st_image=still image
+ti_st_sequence=sequence
+ti_st_avi=AVI
+ti_st_directshow=DirectShow
+ti_st_quicktime=Quicktime
+ti_st_rtv=RTV
+ti_st_wave=WAV
+ti_st_clipboard_image=embedded image
+ti_st_shmem=frame buffer
+ti_st_adjustment=adjustment layer
+ti_st_brush=brush layer
+ti_st_brush_sequence=brush sequence layer
+ti_st_ph_cine=Phantom cine
+ti_st_text=text layer
+ti_st_video=video layer
+ti_st_embedded_audio=embedded audio
+ti_st_r3d=RED R3D
+
+ti_frames=frames
+
+ti_wave_mono=mono
+ti_wave_stereo=stereo
+
+ti_shm_frame=Frame: {1}
+ti_shm_rtime=Render time: {1}m {2}.{3:02d}s
+ti_shm_project=Project: {1}
+
+ti_shm_caption_frame=      {1}
+ti_shm_caption_rtime=      {1}m {2}.{3:02d}s
+
+ti_peak_audio_volume=Peak audio volume: {1:.2f}, {2:.1f} dB
+ti_peak_audio_volume2=; {1:.2f}, {2:.1f} dB at {3}%
+
+pv_layer_size=Shows the resolution of the selected layer
+pv_mask_size=Click to toggle safe area and mask; right click for options
+pv_timecode=Right click to choose which indicator to display
+pv_zoom=Drag left/right to change the zoom, double click to toggle between 100% and fit to window, right click to select from list
+pv_fps=Click to allow/disallow skipping frames to maintain frame rate
+pv_memory=Shows the amount of free RAM. Right-click to set the amount that should be kept free.
+pv_volume=Drag left/right or use the wheel to change the volume, double click to toggle audio
+pv_aspect=Click to toggle the global aspect ratio correction, right click to select from list
+
+pv_zcm_fit_window=Fit to Window
+pv_zcm_fit_mask=Fit to Mask
+
+pv_zcm_hd720_ntsc=HD720 to NTSC
+pv_zcm_hd720_pal=HD720 to PAL
+pv_zcm_hd1080_ntsc=HD1080 to NTSC
+pv_zcm_hd1080_pal=HD1080 to PAL
+
+pv_fps_can_drop_frames=Allow skipping frames
+pv_fps_cannot_drop_frames=Do not allow skipping frames
+
+pvm_layer_crop=Drag to change the crop rectangle of the layer
+
+pvm_layer_aspect=Drag to change the pixel aspect of the layer, double-click to reset it to 1.0, right-click to select from list
+pvm_set_default_aspect=Set {1:.3f} as default for {2}x{3}
+
+panel.mi_hide_panel=Hide Panel
+
+panel.tab_color=Color
+panel.tab_placement=Placement
+
+panel.layer_hint=Drag to move the panel, right-click to select from list
+panel.tab_hint=Drag to move the panel, right-click to select from list
+
+panel.previous=Previous
+panel.next=Next
+
+panel.color_space=Color Space
+panel.exposure_softclip=Exposure / Soft Clip
+panel.lift_gamma_gain=Lift / Gamma / Gain
+panel.brightness_contrast=Brightness / Contrast
+panel.hue_saturation=Hue / Saturation
+
+panel.edit_field_hint=Drag left/right, shift+drag or use the mouse wheel to change, double-click to enter a new value
+panel.chooser_hint=Use the mouse wheel to change, right-click to select from list
+panel.checkbox_hint=Click to toggle
+
+panel.colorspace_default=Default
+panel.colorspace_linear=Linear
+panel.colorspace_srgb=sRGB
+panel.colorspace_custom=Custom
+
+panel.linear_cineon=Linear Cineon
+
+panel.split_color_hint=Enables or disables independent per-channel control
+
+panel.disable_cc=Disable Corrections
+
+panel.position=Position
+panel.dimensions=Dimensions
+panel.scale=Scale
+panel.aspect=Pixel Aspect
+panel.flip_x=Flip Horizontally
+panel.flip_y=Flip Vertically
+panel.border=Border
+panel.crop=Crop
+
+panel.scale_lock_hint=Locks or unlocks the two values
+
+panel.tab_blending=Blending
+
+panel.color_mode=Color Mode
+panel.alpha_mode=Alpha Mode
+panel.depth_mode=Depth Mode
+
+panel.invert_color=Invert Color
+panel.invert_alpha=Invert Alpha
+panel.invert_depth=Invert Depth
+
+panel.alpha_source=Alpha Source
+
+panel.channel_b=Blue Channel
+panel.channel_g=Green Channel
+panel.channel_r=Red Channel
+panel.channel_a=Alpha Channel
+panel.channel_z=Depth Channel
+panel.channel_l=Luma Channel
+
+panel.invert_source=Invert Source
+panel.stretch_to_fit=Stretch to Fit
+
+alpha_source_replace=Replace
+alpha_source_combine=Combine with...
+alpha_source_multiply=Multiply with...
+
+view_b_grayscale=Blue (grayscale)
+view_b_color=Blue (color)
+view_b_hidden=Blue hidden
+view_g_grayscale=Green (grayscale)
+view_g_color=Green (color)
+view_g_hidden=Green hidden
+view_r_grayscale=Red (grayscale)
+view_r_color=Red (color)
+view_r_hidden=Red hidden
+view_rgb=RGB
+view_alpha=Alpha
+view_luma=Luma
+view_depth=Depth
+
+back_color_black=Black
+back_color_dark_grey=Dark Grey
+back_color_green=Green
+back_color_blue=Blue
+back_color_magenta=Magenta
+back_color_white=White
+back_color_transparent=Checkerboard
+back_color_custom=Custom
+
+back_color_set_as_default=Set {1} as Default
+
+safe_area_none=No Safe Area
+safe_area_blue=Blue Safe Area
+safe_area_orange=Orange Safe Area
+
+mask_none=No Mask
+mask_transparent=Transparent Mask
+mask_crop=Crop to Mask
+mask_crop_safe=Crop to Safe Area
+
+mask_transforms_enabled=Apply Pan, Zoom, Aspect to Mask
+
+cache_resolution_full=Full Resolution
+cache_resolution_half=Half Resolution
+cache_resolution_quarter=Quarter Resolution
+
+alpha_ignore=Ignore Alpha
+alpha_normal=Normal Alpha
+alpha_pm=Premultiplied Alpha
+alpha_pm2=Premultiplied Mask
+
+ta_set_default_alpha_ignore=Set Ignore Alpha as Default
+ta_set_default_alpha_normal=Set Normal Alpha as Default
+ta_set_default_alpha_pm=Set Premultiplied Alpha as Default
+ta_set_default_alpha_pm2=Set Premultiplied Mask as Default
+
+blend_normal=Normal
+blend_add=Add
+blend_mul=Multiply
+blend_screen=Screen
+blend_difference=Difference
+
+depth_ignore=Ignore Depth
+depth_replace=Replace Depth
+depth_combine=Combine Depth
+
+ui_cm_copy=Copy
+ui_cm_paste=Paste
+ui_cm_reset=Reset
+
+reset_pan_and_zoom=Reset/Fit to Window
+
+toggle_fullscreen=Full Screen Mode
+toggle_timeline=Timeline
+toggle_infobar=Information Bar
+toggle_mask=Mask
+toggle_grid=Grid
+toggle_vsync=Synchronize Display
+toggle_property_panel=Layer Properties
+
+mail_screen_as_jpeg=E-mail Screen as JPEG
+mail_screen_as_png=E-mail Screen as PNG
+
+clipboard_paste=Paste
+clipboard_paste_frame=Paste as Single Frame
+clipboard_paste_image=Paste as Embedded Image
+
+layer_delete_selected=Delete Selected
+layer_move_selected_up=Move Up
+layer_move_selected_down=Move Down
+layer_half_width_left=Half Width Left
+layer_half_width_right=Half Width Right
+layer_toggle_disablecache=Disable Caching
+layer_remove_from_cache=Remove from Cache
+layer_duplicate=Duplicate
+layer_duplicate_and_split=Duplicate and Split
+layer_toggle_autoupdate=Automatic Update
+layer_rescan_sequence=Rescan for New Frames
+
+clipboard_copy_layer=Copy Layer and Frame
+
+mail_frame_as_jpeg=E-mail Frame as JPEG
+mail_frame_as_png=E-mail Frame as PNG
+
+locate_in_explorer=Locate in Explorer
+open_with=Open with...
+
+resize_window_to_fit=Resize Window to Fit
+
+mi_file=File
+mi_edit=Edit
+mi_view=View
+mi_play=Play
+mi_layer=Layer
+
+add_layer=Add Layer...
+add_recent=Add Recent
+open_composition=Open Composition...
+open_recent=Open Recent
+open_unsaved=Open Unsaved
+save_composition=Save Composition
+save_composition_as=Save Composition as...
+save_frame_as=Save Frame as...
+save_screen_as=Save Screen as...
+save_mask_as_image=Save Mask as Image...
+save_layer_as=Save Layer as...
+save_mask_as_sequence=Save Mask as Sequence...
+exit=Exit
+
+no_recent_items=No Recent Items
+no_unsaved_items=No Unsaved Compositions
+
+clipboard_copy_mask=Copy Mask as Image
+clipboard_copy_screen=Copy Screen as Image
+
+layer_select_up=Select Previous Layer
+layer_select_down=Select Next Layer
+layer_select_first=Select First Layer
+layer_select_last=Select Last Layer
+layer_select_none=Clear Selection
+workarea_set_begin=Set Work Area Begin at Current
+workarea_set_end=Set Work Area End at Current
+workarea_set_to_selection=Set Work Area to Selection
+cache_clear=Clear Cache
+
+increase_zoom_factor=Zoom In
+decrease_zoom_factor=Zoom Out
+channel_b=Toggle Blue Channel
+channel_g=Toggle Green Channel
+channel_r=Toggle Red Channel
+channel_a=Toggle Alpha Channel
+channel_l=Toggle Luma Channel
+channel_z=Toggle Depth Channel
+channel_b_mode=Toggle Blue Channel Mode
+channel_g_mode=Toggle Green Channel Mode
+channel_r_mode=Toggle Red Channel Mode
+
+play_forward=Play Forward
+play_backward=Play Backward
+toggle_pause=Pause
+reverse_playback_direction=Reverse Playback Direction
+first_frame=Go to First Frame
+next_frame=Next Frame
+prev_frame=Previous Frame
+last_frame=Go to Last Frame
+toggle_repeat=Toggle Repeat Mode
+increase_fps=Increase Playback Rate
+decrease_fps=Decrease Playback Rate
+
+layer_go_to_begin=Go to Begin
+layer_go_to_end=Go to End
+layer_go_to_in=Go to In Point
+layer_go_to_out=Go to Out Point
+layer_align_begin=Align Begin at Current
+layer_align_end=Align End at Current
+layer_align_in=Align In Point at Current
+layer_align_out=Align Out Point at Current
+layer_set_in_at_current=Set In Point at Current
+layer_set_out_at_current=Set Out Point at Current
+layer_shift_left=Shift One Frame to the Left
+layer_shift_right=Shift One Frame to the Right
+reset_layer_position=Reset Position
+layer_half_height_up=Half Height Up
+layer_half_height_down=Half Height Down
+layer_move_left=Nudge Left
+layer_move_right=Nudge Right
+layer_move_up=Nudge Up
+layer_move_down=Nudge Down
+layer_update_frame=Update Frame
+layer_update_modified=Update Modified Frames
+layer_replace_with=Replace with...
+layer_replace_with_previous=Replace with Previous Image
+layer_replace_with_next=Replace with Next Image
+
+add_layer_title=Add Layer
+add_as_single_image=Add as single image
+append_at_end=Position after the current layer
+all_formats_filter=All Formats
+
+save_screen_as_title=Save Screen as
+save_frame_as_title=Save Frame as
+save_mask_as_image.title=Save Mask as Image
+
+save_composition_as_title=Save Composition as
+open_composition_title=Open Composition
+pdplayer_composition_filter=Pdplayer Composition
+
+new_composition=New Composition
+
+save_layer_as.cdlg_title=Save Layer as
+save_layer_as.pdlg_title=Saving Layer
+save_layer_as.action=Saving {1}...
+save_layer_as.missing_frame=missing/invalid frame
+
+save_layer_as_avi.action=Saving frame {1}...
+save_layer_as_avi.error=Error saving frame {1}
+
+save_layer_as_qt.action=Saving frame {1}...
+save_layer_as_qt.error=Error saving frame {1}
+
+save_mask_as_sequence.cdlg_title=Save Mask as Sequence
+
+save_mask_as_sequence.pdlg_title=Saving Mask as Sequence
+save_mask_as_sequence.action=Saving {1}...
+
+save_mask_as_avi.pdlg_title=Saving Mask as AVI
+save_mask_as_avi.action=Saving frame {1}...
+
+save_mask_as_qt.pdlg_title=Saving Mask as Quicktime
+save_mask_as_qt.action=Saving frame {1}...
+
+sfn.compression_label=Compression:
+sfn.uncompressed=Uncompressed
+sfn.rle=RLE
+
+sfn.quality_label=Quality:
+
+new_adjustment_layer=New Adjustment Layer
+new_brush_layer=New Brush Layer
+new_brush_sequence_layer=New Brush Sequence Layer
+new_text_layer=New Text Layer
+
+panel.tab_brush=Brush
+
+pp_tab_brush.size=Size
+pp_tab_brush.softness=Softness
+pp_tab_brush.spacing=Spacing
+pp_tab_brush.opacity=Opacity
+
+pv_hint_size=Size: {1}
+pv_hint_softness=Softness: {1}
+
+panel.color_spot_hint=Click to choose color
+panel.color_field_hint=Drag to change brightness, double-click to enter a color
+panel.brush_preview_hint=Drag left/right to change brush size, up/down to change softness
+
+toggle_always_on_top=Always on Top
+
+toggle_spb_enabled=Enable Secondary Playback Buttons
+
+pv_mask_preset=Preset: {1}x{2}
+pv_mask_layer=Layer: {1}x{2}
+pv_mask_layer2=Layer, {1:.2f}:1: {2}x{3}
+
+clear_canvas=Clear Canvas
+
+undo=Undo
+
+undo_brush_stroke=Undo Brush Stroke
+redo_brush_stroke=Redo Brush Stroke
+
+undo_clear_canvas=Undo Clear Canvas
+redo_clear_canvas=Redo Clear Canvas
+
+undo_delete_layer=Undo Delete Layer
+
+undo_layer_move=Undo Layer Move
+redo_layer_move=Redo Layer Move
+
+undo_layer_move_crop=Undo Move Crop Rectangle
+redo_layer_move_crop=Redo Move Crop Rectangle
+
+internal_copy_color=Copy Color
+
+export_composition_as_title=Export Composition as
+export_composition_as=Export Composition as...
+
+layer_resize_to_timeline=Resize to Timeline
+layer_resize_to_workarea=Resize to Work Area
+
+cache_stop_preload=Stop Preload
+layer_preload_into_cache=Preload into Cache
+toggle_automatic_preload=Enable Automatic Preload
+
+undo_move_in_timeline=Undo Move in Timeline
+redo_move_in_timeline=Redo Move in Timeline
+
+undo_multiple_move_in_timeline=Undo Multiple Move in Timeline
+redo_multiple_move_in_timeline=Redo Multiple Move in Timeline
+
+panel.reset_lift=Reset Lift
+panel.set_shadow_color=Set Shadow Color...
+panel.paste_shadow_color=Paste Shadow Color
+panel.set_black_point=Set Black Point...
+panel.paste_black_point=Paste Black Point
+
+panel.reset_gamma=Reset Gamma
+panel.set_midtone_color=Set Midtone Color...
+
+panel.reset_gain=Reset Gain
+panel.set_highlight_color=Set Highlight Color...
+panel.paste_highlight_color=Paste Highlight Color
+panel.set_white_point=Set White Point...
+panel.paste_white_point=Paste White Point
+
+toggle_pv_tooltip=Preview Area Tooltip
+
+clipboard_copy_layer_as_nk=Copy Layer as Nuke Script
+
+execute_cmdfile=Execute Command File...
+execute_cmdfile.title=Execute Command File
+pdpcmd_filter=Pdplayer Command File
+
+layer_watch_sequence=Watch for New Frames
+
+tc_frame=Composition Frame
+tc_timecode=Composition Time Code
+tc_frame_from_name=Frame from File Name
+tc_embedded_frame=Embedded Frame Number
+tc_embedded_timecode=Embedded Time Code
+tc_embedded_keycode=Embedded Edge/Key Code
+
+pp_lookup_chooser.hint=Current lookup table: {1}
+pp_lookup_chooser.hint2=Use the mouse wheel to change, right-click for options
+pp_lookup_chooser.none=Default
+pp_lookup_chooser.import=Import...
+pp_lookup_chooser.export=Export...
+pp_lookup_chooser.export_with_cc=Export with Color Corrections...
+pp_lookup_chooser.delete=Delete Selected Table
+pp_lookup_chooser.delete_unused=Delete All Unused Tables
+
+lookup_table_filter=Lookup Table
+import_lookup_table_title=Import Lookup Table...
+export_lookup_table_title=Export Lookup Table...
+
+timeline_fit_all_layers=Resize Timeline to Fit All Layers
+timeline_trim_to_workarea=Trim Timeline to Work Area
+layer_position_after=Position after Next Layer
+
+toggle_layer_stack=Layer Stack
+
+update_all_layers=Update All Layers
+
+clipboard_copy_cc=Copy Color Corrections
+
+panel.tab_text=Text
+
+pp_tab_text.text=Text
+pp_tab_text.font=Font
+pp_tab_text.bold=Bold
+pp_tab_text.italic=Italic
+
+panel.text_field_hint=Double-click to enter a new value
+
+pp_tab_text.outline=Outline
+pp_tab_text.shadow=Shadow
+
+pp_tab_text.align=Alignment
+
+align_x_left=Left
+align_x_center=Center
+align_x_right=Right
+
+align_y_top=Top
+align_y_middle=Middle
+align_y_bottom=Bottom
+
+pp_tab_text.background=Background
+
+pp_tab_text.cm_edit_text=Edit Text
+pp_tab_text.cm_save_attr_as_default=Save Attributes as Default
+
+pp_tab_text.text_hint=Double-click to edit text
+pp_tab_text.font_hint=Double-click to choose font
+
+pvm_layer_scale_xy=Drag to scale the layer; double-click to reset scale to 100%
+pvm_layer_scale_x=Drag to scale the layer horizontally; double-click to reset the horizontal scale to match the vertical scale
+pvm_layer_scale_y=Drag to scale the layer vertically; double-click to reset the vertical scale to match the horizontal scale
+
+pvm_layer_resize_xy=Drag to resize the layer; ctrl-drag to scale
+pvm_layer_resize_x=Drag to resize the layer; ctrl-drag to scale
+pvm_layer_resize_y=Drag to resize the layer; ctrl-drag to scale
+
+pp_tab_color.lookup_table=Lookup Table
+
+new_video_layer=New Video Layer
+no_video_input_devices=No Video Input Devices
+
+layer_replace_with_title=Replace Layer with...
+
+ignore_alpha_channel=Do not save alpha channel
+
+panel.tab_effects=Effects
+pp_tab_effects.color_key=Color Key
+pp_tab_effects.primary_key=Primary Key
+pp_tab_effects.secondary_key=Secondary Key
+
+mail_mask_as_jpeg=E-mail Mask as JPEG
+mail_mask_as_png=E-mail Mask as PNG
+
+back_color_paste_color=Paste Color
+
+preload_all_layers=Preload All Layers
+
+panel.opacity_and_fade=Opacity and Fade
+
+embed_layer=Embed Layer
+
+img_layer_chooser.default=Default
+
+panel.tab_source=Source
+pp_tab_source.image_layer=Image Layer
+pp_tab_source.channels=Channels
+pp_tab_source.version=Version
+pp_tab_source.target_view=Target View
+
+pp_tab_source.target_view_left=Left
+pp_tab_source.target_view_right=Right
+pp_tab_source.target_view_both=Both
+
+panel.tab_r3d=R3D
+
+pp_tab_r3d.resolution=Resolution
+r3d_decode_full=Full
+r3d_decode_half_premium=Half Premium
+r3d_decode_half=Half
+r3d_decode_quarter=Quarter
+r3d_decode_eighth=Eighth
+
+pp_tab_r3d.preset=Color Preset
+r3d_color_preset_clip=Clip
+r3d_color_preset_default=Default
+r3d_color_preset_raw=Raw
+
+pp_tab_r3d.kelvin_tint=Temperature / Tint
+pp_tab_r3d.iso_compensation=ISO / FLUT
+
+pp_tab_r3d.color_space=Color Space
+r3d_color_space_redspace=REDspace
+r3d_color_space_rec709=Rec. 709
+r3d_color_space_camera_rgb=Camera RGB
+
+opt_target_view=Click to cycle between left, right and stereo view; right click for options
+
+opt_target_view_left=Left View
+opt_target_view_right=Right View
+opt_target_view_both=Stereo View
+
+opt_stereo_view_anaglyph=Red/Cyan Anaglyph
+opt_stereo_view_interlaced=Interlaced
+opt_stereo_view_checkerboard=Checkerboard
+opt_stereo_view_anaglyph_gm=Green/Magenta Anaglyph
+
+opt_switch_views=Switch Left and Right View
+
+expand_into_layers=Expand into Layers
+
+panel.safe_area=Safe Area
+
+layer_select_all=Select All Layers
+
+undo_delete_layers=Undo Delete Layers
+
+add_other_stereo_view=Add Other Stereo View
+add_layer.add_other_stereo_view=Add other stereo view
+
+undo_blend_mode_change=Undo Blend Mode Change
+redo_blend_mode_change=Redo Blend Mode Change
+undo_alpha_mode_change=Undo Alpha Mode Change
+redo_alpha_mode_change=Redo Alpha Mode Change
+undo_depth_mode_change=Undo Depth Mode Change
+redo_depth_mode_change=Redo Depth Mode Change
+
+selection_replace_with_title=Choose a Base Folder...
+
+r3d_color_space_redcolor=REDcolor
+
+pp_tab_r3d.gamma_curve=Gamma Curve
+r3d_gamma_none=None
+r3d_gamma_rec709=Rec. 709
+r3d_gamma_redspace=REDspace
+r3d_gamma_redgamma=REDgamma
+
+ta_hotspot_audible=Click to toggle the layer audio; use the mouse wheel to change the volume
+
+save_layer_as_qt.saving_audio=Saving audio...
+save_mask_as_qt.saving_audio=Saving audio...
+
+pp_tab_placement.name_and_group_id=Name / Group ID
+pp_tab_placement.multiple=(multiple)
+
+pp_tab_effects.frames=Frames
+
+layer_select_group=Select Group
+layer_assign_group=Assign New Group to Selection
+
+save_as_sequence.paused_at=Paused at
+save_as_sequence.pause=Pause
+save_as_sequence.resume=Resume
+save_as_sequence.abort=Abort
+
+toggle_disable_caching_by_default=Disable Caching by Default
+toggle_continue_playback_after_drag=Continue Playback after Scrubbing
+
+edit_text_title=Edit Text
+qt_settings_title=Quicktime Settings
+
+reveal_in_finder=Reveal in Finder
+
+undo_position_after=Undo Position after Next Layer
+redo_position_after=Redo Position after Next Layer

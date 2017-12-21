@@ -1,0 +1,9 @@
+global proc EvalRenderTool(){
+    global string $myPath;
+    string $myPath = "Z:/HappyPiggy/Data/RenderPlugin";
+    eval ("source  \"" + $myPath + "/Scripts/RenderTool.mel\";");
+    python ("execfile('" + $myPath + "/Scripts/AutoLayer.py')");
+    python ("execfile('" + $myPath + "/Scripts/SetRGB.py')");
+}
+
+EvalRenderTool()

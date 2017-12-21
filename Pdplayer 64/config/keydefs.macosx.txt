@@ -1,0 +1,7 @@
+ctrl+f		toggle_fullscreen
+ctrl+d		layer_duplicate
+ctrl+shift+r	reveal_in_finder
+meta+1		resize_window_to_fit
+meta+left	layer_replace_with_previous
+meta+right	layer_replace_with_next
+ctrl+u		update_all_layers
