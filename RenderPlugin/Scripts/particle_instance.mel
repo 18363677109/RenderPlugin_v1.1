@@ -1,0 +1,127 @@
+
+
+proc selPara(int $choose) 
+{  pickWalk -d down; 
+   string $sel[] = `ls -sl`;
+       
+        for ($myObj in $sel)
+    {
+       
+if ($choose==1)
+{
+    addAttr -ln "rgbPP" -dt vectorArray $myObj;
+addAttr -ln "rgbPP0" -dt vectorArray $myObj;
+addAttr -ln "myID0"  -dt doubleArray  $myObj;
+addAttr -ln "myID"  -dt doubleArray  $myObj;
+addAttr -ln "myScale0"  -dt vectorArray  $myObj;
+addAttr -ln "myScale"  -dt vectorArray  $myObj;
+
+addAttr -ln "myRot0"  -dt vectorArray  $myObj;
+addAttr -ln "myRot"  -dt vectorArray  $myObj;
+dynExpression -s "myID =rand(0,5); \n myRot = <<0 , rand(0 , 360) , 0>>; \n myScale =rand( 0.1  ,  0.5) * mag(rgbPP);" -c $myObj;
+
+particleInstancer   -cycle None -cycleStep 1 -cycleStepUnits Frames -levelOfDetail BoundingBox -rotationUnits Degrees -rotationOrder XYZ -position worldPosition -rotation myRot -scale myScale -objectIndex myID -age age $myObj;
+}
+
+
+
+
+
+    }
+    
+}
+
+
+
+proc selPar(int $choose) 
+{ 
+   string $sel[] = `ls -sl`;
+       
+        for ($myObj in $sel)
+    {
+       
+
+if($choose==2)  setAttr  ($myObj+".inheritColor") 1;
+if($choose==3)  setAttr  ($myObj+".inheritColor") 0; 
+if($choose==4)  setAttr  ($myObj+".enableTextureRate") 1;
+if($choose==5)  setAttr  ($myObj+".enableTextureRate") 0;  
+if($choose==6)  setAttr  ($myObj+".levelOfDetail") 2;
+if($choose==7)  setAttr  ($myObj+".levelOfDetail") 1;
+if($choose==8)  setAttr  ($myObj+".levelOfDetail") 0;      
+if($choose==9)  setAttr ($myObj+".rate") 0;  
+if($choose==10) setAttr ($myObj+".emitFromDark") 1;
+if($choose==11) setAttr ($myObj+".emitFromDark") 0;
+if($choose==12) setAttr ($myObj+".visibility") 0;
+if($choose==13) setAttr ($myObj+".visibility") 1;
+
+
+
+
+    }
+    
+}
+
+
+
+
+
+
+
+if( `window -exists $subWindow` )
+{
+    deleteUI  $subWindow;
+    
+}
+
+
+string $subWindow =`window -title "Õı÷æΩ‹V1.003"
+                          -wh 180 200
+                          subWindow `;
+rowColumnLayout  -nc 2
+                 -cw 5 180 ;
+     separator;separator;
+     separator;separator;            
+     button -l "Edit particle" -c "selPara(1)" ; text -l "  Select multiple nparticle "; 
+     separator;separator;
+     separator;separator;
+     separator;separator;
+     separator;separator;
+     button -l "InheritColor_ON" -c "selPar(2)" ; text -l "  Select multiple emitter "; 
+     separator;separator;
+     button -l "InheritColor_OFF" -c "selPar(3)" ; text -l "  Select multiple emitter "; 
+     separator;separator;
+     separator;separator;
+     
+     button -l "Enable_TX rate_ON" -c "selPar(4)" ; text -l "  Select multiple emitter "; 
+     separator;separator;
+     button -l "Enable_TX rate_OFF" -c "selPar(5)" ; text -l "  Select multiple emitter ";
+       separator;separator;
+     separator;separator;
+     button -l "Emit from dark_ON" -c "selPar(10)" ; text -l "  Select multiple emitter ";
+     separator;separator;
+     button -l "Emit from dark_OFF" -c "selPar(11)" ; text -l "  Select multiple emitter "; 
+      separator;separator;
+     separator;separator;
+     
+     button -l "…Ë÷√par_rate=0" -c "selPar(9)" ; text -l "  Select multiple emitter "; 
+     separator;separator;
+     separator;separator;
+     separator;separator;
+     separator;separator;
+    button -l "BoundingBox" -c "selPar(6)" ; text -l "  Select multiple Instancer "; 
+    button -l "BoundingBoxes" -c "selPar(7)" ; text -l "  Select multiple Instancer "; 
+    button -l "Geometry" -c "selPar(8)" ; text -l "  Select multiple Instancer "; 
+     separator;separator;
+     separator;separator;
+     button -l "VisibilityOFF" -c "selPar(12)" ; text -l "  Select Anything  "; 
+     button -l "VisibilityON" -c "selPar(13)" ; text -l "  Select Anything  "; 
+
+
+
+
+
+
+
+
+
+showWindow;
