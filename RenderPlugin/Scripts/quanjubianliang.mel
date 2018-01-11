@@ -1,0 +1,144 @@
+getAttr defaultRenderGlobals.currentRenderer;//获取当前渲染器
+setAttr defaultRenderGlobals.currentRenderer -type "string" "arnold"; //设置默认渲染器为arnold
+
+
+string $whatrender = `getAttr defaultRenderGlobals.currentRenderer`;
+print("the current renderer is "+$whatrender+"\!");//获取当前渲染器并且输出渲染器名字 还加了！号
+
+//----------------------------检查并切换around渲染器--------------------------
+string $whatrender = `getAttr defaultRenderGlobals.currentRenderer`;
+print("the current renderer is "+$whatrender+"\!");
+print("\n");
+if($whatrender=="arnold"){
+    print ("渲染器是正确的");
+}
+else{
+     print ("渲染器不是arnold，切换了");
+     setAttr defaultRenderGlobals.currentRenderer -type "stri   ng" "arnold";
+}
+setAttr defaultRenderGlobals.currentRenderer -type "string" "arnold";
+
+//----------------------------if语句--------------------------
+int $counter;
+if(frame==1){
+$counter=200;
+}else{
+   $counter=$counter-1;
+}
+setAttr textForBevel1.text -type "string" $counter;
+
+
+//----------------------------else if语句--------------------------
+int $counter;
+int $n;
+if(frame==1){
+$counter=200;
+$n=1;
+}else if(frame==5*$n){
+    $n=$n+1;
+   $counter=$counter-1;
+}
+setAttr textForBevel1.text -type "string" $counter;
+
+
+//----------------------------window唯一--------------------------
+if(`window -ex $window`){
+    deleteUI -window $window;
+}
+string $window=`window -t "001"
+                -wh 300 200
+                     my1Window`;
+    showWindow;
+
+//----------------------------for in循环--------------------------
+    proc keyTX(){
+    string $sel[] = `ls -sl`;
+    for($myObject in $sel){
+   setKeyframe -at "translateX";}
+}
+
+//-----------------求出文件名字  文件名和灯光名字一致 删除大纲对应灯光的时候也方便--------------------
+// string $fileName = `file -q -sceneName -shortName`;  得到文件名和路径  -shortName 加上这个不返回路径，只返回文件名
+//substituteAllString(要被更改的字符串,要被替换掉的字符串,要被添加的字符串)
+
+string $fileName = `file -q -sceneName -shortName`;
+$fileName = substituteAllString($fileName,".ma","");
+int $counter;
+$counter = $counter+1;
+print($counter);
+print("\n");
+file -rename ($fileName+$counter+".ma");
+file -s -type "mayaAscii";
+print("just Saved "+($fileName+$counter+".ma"));
+
+ //---------------------------------match命令的用法 -------------------------------------
+string $fileName = `file -q -sceneName -shortName`;
+$fileName = substituteAllString($fileName,".ma","");
+string $stringNumber = `match "[0-9]+" $fileName`; //match返回第二个字符串与第一个字符串相匹配的内容
+int $n=$stringNumber;     //将字符串类型的变量转换为整型，用于数字累加 新定义一个整数，数字就是字符串的值
+$n=$n+1;
+$fileName = substituteAllString($fileName,$stringNumber,"");  //到这里实现了文件名后面的数字清除
+                      
+file -rename ($fileName+$n+".ma");
+file -s -type "mayaAscii";
+print("just Saved "+($fileName+$n+".ma")); //到这里代码实现了文件名在原来基础上 +1  
+//但是这里只能执行文件名带数字的，对于文件名不带数字的文件，一旦执行就会崩溃
+//这里的思路就是加入if 条件判断
+//-----------------------------------------------------------------------------------------------------
+string $fileName = `file -q -sceneName -shortName`;
+$fileName = substituteAllString($fileName,".ma","");
+string $stringNumber = `match "[0-9]+" $fileName`; 
+int $n;
+if($stringNumber==""){   //意思是如果stringNumber里面是空的
+ $n = 1;               //这里的思路就是加入if 条件判断
+}  else{                 //如果有数字的话就执行以下内容
+    $n=$stringNumber;    
+    $n=$n+1;
+    $fileName = substituteAllString($fileName,$stringNumber,"");
+}              
+
+                      
+file -rename ($fileName+$n+".ma");
+file -s -type "mayaAscii";
+print("just Saved "+($fileName+$n+".ma"));
+
+//----------------------------------addAttr命令--------------------------------------
+//新加入一些属性，比如宝哥要的高低摸切换，加入一个切换参数
+addAttr -ln "controlColor" -usedAsColor -attributeType float3 //float3意思是rgb三个
+addAttr -ln "red" -at "float" -parent "controlColor";
+addAttr -ln "green" -at "float" -parent "controlColor";
+addAttr -ln "blue" -at "float" -parent "controlColor";
+//----------------------------------connectAttr强制链接属性--------------------------------------
+string $sel[]=`ls -lt`;
+for($myObject in $sel){
+    connectAttr -f locator1.controlColor ($myObject".color"); //强制链接属性
+    connectAttr -f locator1.contolLightsIntensity ($myObject".intensity");
+   
+}
+
+//----------------------------------python部分--------------------------------------
+//-class1
+import maya.cmds as cmds   #这样下方的cmds.就可以代表maya.cmds了 缩减的写法
+cmds.polySphere()
+cmds.select("pSphere2")
+print "hello"
+//-class2
+myString = "this is my first python string" //不用$符号来定义 它自己判断这是个字符串
+print myString
+// 在Python中使用变量，使用mel的代码
+import maya.cmds as cmds   #这样下方的cmds.就可以代表maya.cmds了 缩减的写法
+myList = cmds.polySphere() 
+print ("the object is "+myList[0]) #这样就输出第一个信息
+//-class3 eval的使用！ 
+import maya.mel as mel
+help(maya.mel) // 发现只有一个函数eval（） 这函数会使用mel自己的解释程序
+
+//同样一个命令对比 
+setAttr pSphere1.translateY 10;  //maya
+
+mySphere=maya.cmds.polySphere()
+maya.mel.eval("setAttr pSphere1.translateY 10") //eval里将maya命令原样放进去
+
+//第一行是py命令 第二行eval里是mel 但是有mySphere这个py变量 所以引号内的格式要注意“”的应用 
+mySphere=maya.cmds.polySphere()
+maya.mel.eval("setAttr "+ mySphere[0]+".translateY 10") 

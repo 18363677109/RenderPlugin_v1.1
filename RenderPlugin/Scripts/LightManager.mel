@@ -1,0 +1,106 @@
+//-*- coding: utf-8 -*-
+//file :LightAssetManager
+//author:u'常江'
+//email:316684752@qq.com
+//date:2018.01.08
+
+//file命令是这一部分的重要命令 file -import 导入 -loc 位置  
+
+//hudmessage 附加到新导入的灯光上，这样就提醒了制作人新的灯光在哪
+headsUpMessage -object aiAreaLight1 -time 5 "灯光已导入";
+
+inViewMessage -smg " 灯光已导入" -pos midCenter -bkc 0x00000000 -fade;
+
+//ls -lt 列出灯光
+
+//宝哥想加入高低模型切换功能 需要用到基础火星mel基础第28课左右的内容，绑定时需要有高低摸，并有
+//在channel box中加入一条属性，然后写个工具整体将选中部分的高模切换为低模 等功能
+
+
+//-----------------------------------------------界面部分---------------------------------------------
+if( `window -exists $lightManagerWindow` )
+{
+    deleteUI  $lightManagerWindow;
+    
+}
+string $lightManagerWindow = `window -widthHeight 1280 720 lightManagerWindow `;
+string $form = `formLayout`;
+string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;
+formLayout -edit
+    -attachForm $tabs "top"    0
+     -attachForm $tabs "left"   0
+     -attachForm $tabs "bottom" 0
+     -attachForm $tabs "right"  0
+     $form;
+
+//定义第1栏的全部按钮iconTextButton和界面
+     string $child1 = `rowColumnLayout -numberOfColumns 8`;
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+          
+         button; button; button;button; button; button;
+
+
+
+         setParent ..;
+
+//定义第2栏的全部按钮iconTextButton和界面
+     string $child2 = `rowColumnLayout -numberOfColumns 6`;
+
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
+         button; button; button;
+         setParent ..;
+
+//定义第3栏的全部按钮iconTextButton和界面
+     string $child3 = `frameLayout -label "其他灯光" -cll true -bs "in" -bv true`;
+                rowColumnLayout -nc 6; 
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光01 双击删除" -c "  " -dcc " ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                setParent ..;
+                 frameLayout -label "另一类灯光" -cll true -bs "in" -bv true;
+            rowColumnLayout -nc 8;
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+                setParent ..;
+        	setParent ..;
+
+           
+
+
+     tabLayout -edit
+         -tabLabel $child1 "日光" -tabLabel $child2 "室内" -tabLabel $child3 "野外"
+         $tabs;
+
+
+
+    showWindow;
+
