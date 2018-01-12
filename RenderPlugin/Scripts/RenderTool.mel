@@ -43,7 +43,7 @@ global proc RenderTool(){
                 iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/08.bmp") -l "材质清理" -c ("hyperShadePanelMenuCommand(\"hyperShadePanel1\", \"deleteUnusedNodes\");");
                 iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/07.bmp") -l "打开看图器" -c "system(\"start T:/BL_Mid/xXx/Pdplayer 64/pdplayer64.exe\")"; 
                 //上一句的已经破解的插件的路径记得修正
-                iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/02.png") -l "设置RGB" -c "RGB_UI()" -stp "python";
+                iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/02.png") -l "设置RGB" -c "RGBUI()" -stp "python";
                 iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/022.png") -l "王志杰粒子" -c ("source \"" + $myPath + "/" + "Scripts" + "/" + "particle_instance.mel\";");
                 iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/023.png") -l "代理管理器" -c ("source \"" + $myPath + "/" + "Scripts" + "/" + "ProxyManager.mel\";");
                 iconTextButton -h 80 -w 60 -st "iconAndTextVertical" -i1 ($myPath + "/Images/025.png") -l "修复渲染窗" -c ("source \"" + $myPath + "/" + "Scripts" + "/" + "fix_render_window.mel\";");
