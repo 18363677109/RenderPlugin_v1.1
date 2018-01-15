@@ -409,6 +409,7 @@ deleteUI myWin;
 {deleteUI myWin;}   //{}里加上 可执行的事情
 //之后如果直接加button会出错 ，因为还没有布局声明
 
+有的人喜欢第1种创建ui的方式
 if (`window -ex myWin`)
 {deleteUI myWin;}
 
@@ -420,5 +421,176 @@ columnLayout;
 button;
 button;     //button可以在 window myWin;和showWindow myWin;里自由书写
 button; 
-window  -e  //这行的意思是刷新一下 以免新加的按钮没有刷新
+window  -e -wh 300 500 myWin;  //这行的意思是刷新一下 以免新加的按钮没有刷新
 showWindow myWin;
+
+有的人喜欢第2种创建ui的方式 这种方式更明确什么是什么
+if (`window -ex $winName`)
+{deleteUI $winName;}
+string $winName=`window -t "xxxxxx" -wh 300 500`;    //先定义窗口信息的字符串
+columnLayout -adjustableColumn true;    //适配宽度
+button -l "xxxx" -c "polySphere -radius 5";
+button;
+button;
+showWindow $winName;  
+
+基础元素  
+·按钮 button   ·滑条intSliderGrp    ·文本框intField    ·文字text     ·分隔符separator 等等...
+
+
+if (`window -ex myWin`)
+{deleteUI myWin;}
+window  -menuBar true 
+        -t "牛逼" 
+        -wh 300 300
+        myWin;
+menu -label "File" -tearOff true;
+        menuItem -l "new";
+        menuItem -l "old";
+        menuItem -l "save";
+menu -label "about" -tearOff true;
+        menuItem -l "about me" -c "aboutMe"; 
+columnLayout -adjustableColumn true;
+text -l "\n little tricky i like it ! \n"; 
+intSliderGrp -l "fuck" -f true -min 10 -max 50 isgrp1;//这样就给了这个grp一个名称
+button -l "little box" -c "polyCube";
+button -l "little sphere" -c "polyCylinder";
+button -l "little sphere1" -c "mySphere";
+showWindow myWin;
+
+//新建一个global proc 用于创建小球
+global proc mySphere()
+{
+ int $radiusOfSphere=`intSliderGrp -q -v isgrp1`;//意思是求滑竿的值
+ polySphere -radius $radiusOfSphere;
+}
+// 新建一个global proc 用于介绍自己
+global proc aboutMe()
+{
+confirmDialog -t "about Me" -message "this is awesome \n enjoy it "
+-button "yes" -button "no" -defaultButton "yes";
+}
+
+//--------------------------------------主界面菜单 和窗口菜单-------------------
+·窗口菜单menu
+·主界面菜单$gMainWindow;
+
+if(`menu -ex myNewMainMenu`)
+{
+deleteUI menu myNewMainMenu; 
+}
+//创建菜单
+global string $gMainWindow;
+    setParent $gMainWindow;
+    menu -l "changjiang" myNewMainMenu;
+//添加菜单项
+setParent -menu myNewMainMenu;
+    menuItem -l "very NB" -c "source changjiang.mel";
+//把mel存到默认路径，然后source就可以
+    menuItem -subMenu true -tearOff true -l "A" myMakeMeAMenu;
+    menuItem -label "NurbsSphere" -c sphere;
+    menuItem -label "PolySphere" -c polySphere;
+setParent -menu ..;
+menuItem -divider true;
+menuItem -label "yes" -command "";
+menuItem -label "no" -command "";
+
+
+自动启动脚本
+·系统脚本目录检测internalVar-userScriptDir
+·Maya自启动脚本userSetup.mel
+//刚才的mel重开了就不再在原来的位置出现，如果希望maya自动启动，有2方法 第一用c或c++写一个mll插件
+internalVar 可以检测系统脚本目录  internalVar -usd;//usd 就是 userScriptDir
+但是用户一般想自己指认工程路径，那么可能就直接source不到，将上面的 changjiang.mel 存到C盘internalVar -usd
+那个目录，然后新建个mel，里面的内容为
+source "C:/Users/Administrator/Documents/maya/2016/zh_CN/scripts/myMenu.mel" 存的名字必须为userSetup.mel
+这样才会得到changjiang那个窗口
+
+
+//------------------------------------------广告聚合脚本  --------------------------------------
+这个案例要遍历每一个物体，每个多边形都key帧，需要用到for循环
+string $selection[]=`ls -sl`; //列出场景的物体 为for循环做准备
+for($i=0;$i<size($selection);$i++) //场景有多少个，做多少次循环
+{
+//做的事   1.上下左右随机移动 2.做360°随机旋转 3.key动画
+float $transX = rand(-2,2);
+float $transY = rand(-1,1); 
+float $transZ = rand(-2,2);//定义好xyz轴向的位移值
+float $rotateX = rand(-360,360);
+float $rotateY = rand(-360,360);
+float $rotateZ = rand(-360,360);//定义好3个旋转值 角度就是0-360
+
+setAttr ($selection[$i]+".tx") $transX;
+setAttr ($selection[$i]+".ty") $transY;
+setAttr ($selection[$i]+".tz") $transZ;   //  重要：没有运算的不加括号(但加了也不算错，能运行) 有运算的才加括号（字符串叠加也是运算）
+setAttr ($selection[$i]+".rx") $rotateX;
+setAttr ($selection[$i]+".ry") $rotateY;
+setAttr ($selection[$i]+".rz") $rotateZ;
+
+setKeyframe ($selection[$i]+".tx");
+setKeyframe ($selection[$i]+".ty");
+setKeyframe ($selection[$i]+".tz");
+setKeyframe ($selection[$i]+".rx");
+setKeyframe ($selection[$i]+".ry");
+setKeyframe ($selection[$i]+".rz");
+
+}
+
+//----------------------------------------路径复制脚本，多米诺骨牌 --------------------------------------
+插件的设计流程
+·基础指令分析   想明白实现过程
+·构成脚本
+·界面书写  ui
+·程序指令       global proc 让脚本和界面直接关联
+·mel封包（不写也没问题）      
+·菜单衔接（不写也没问题）
+
+global proc pathAnimationDup(int $moXingShuLiang)
+{
+//选择复制的物体
+string $sel[] = `ls -sl`;
+//关联物体
+//路径动画  执行路径动画 得到了文件所需要的核心代码 核心代码里最重要的是结束帧
+pathAnimation
+-fractionMode true
+-follow true
+-followAxis x 
+-upAxis y -worldUpType "vector"
+-worldUpVector  0 1 0 -inverseUp false
+-inverseFront false -bank false
+-startTimeU 1 -endTimeU $moXingShuLiang;  //这个30和for in 里面的30要关联 需要 global proc
+//批量复制
+for ($i=0;$i<$moXingShuLiang;$i++)
+{
+    currentTime ($i+1);
+duplicate -rr $sel[0];  //就是选择所选择物体里面第一个模型
+
+}
+//删除原始曲线和模型
+delete $sel
+select -cl;  //取消选取
+}       //这个是global proc的大括号 
+
+//界面部分的书写
+if (`window -ex PDWin1`)
+{deleteUI PDWin1;}
+window -t "PD" -wh 300 600 PDWin1;
+columnLayout -adjustableColumn true;
+intSliderGrp -label "number" -field true -mix 2 -max 100 PDWIS;   //给滑竿个名字，之后链接求值时用
+button-label "apply" -c "LinkProc" ; //关联创建命令
+
+showWindow PDWin1;
+
+global proc LinkProc()
+{
+    int $num = `intSliderGrp -q -v PDWIS`; //这样滑竿和创建的个数就产生关联  查询PDWIS这个滑竿的值
+    // $num这个num不用担心重名，只作用于大括号内
+    pathAnimationDup  $num;
+}
+//如果““””有需要双引号套着双引号，就会双引号混乱 需要  "\"xxxxxx\"" 放在子集引号之前和结束之前 就好了
+
+
+
+
+
+
