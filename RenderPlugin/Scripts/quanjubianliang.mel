@@ -576,7 +576,7 @@ if (`window -ex PDWin1`)
 {deleteUI PDWin1;}
 window -t "PD" -wh 300 600 PDWin1;
 columnLayout -adjustableColumn true;
-intSliderGrp -label "number" -field true -mix 2 -max 100 PDWIS;   //给滑竿个名字，之后链接求值时用
+intSliderGrp -label "number" -field true -min 2 -max 100 PDWIS;   //给滑竿个名字，之后链接求值时用
 button-label "apply" -c "LinkProc" ; //关联创建命令
 
 showWindow PDWin1;
@@ -589,6 +589,66 @@ global proc LinkProc()
 }
 //如果““””有需要双引号套着双引号，就会双引号混乱 需要  "\"xxxxxx\"" 放在子集引号之前和结束之前 就好了
 
+
+//----------------------------------------  彩虹积木脚本  --------------------------------------
+****第一阶段
+ for 的思维 给每个模型赋予材质 批量重复操作的思维   需要用到rgbtohsv 这个节点
+
+string $sel[]=`ls -sl`;
+
+//创建blinn材质
+shadingNode -asShader blinn;
+sets -renderable true -noSurfaceShader true -empty -name blinn1SG;
+connectAttr -f blinn1.outColor blinn1SG.surfaceShader;
+//创建remaphsv节点
+shadingNode -asUtility remapHsv;
+
+//链接hsv节点到blinn上
+connectAttr -force remapHsv1.outColor blinn1.color;
+
+//将材质赋予给模型
+select -r $sel[0];
+sets -e -forceElement blinn1SG;
+
+//编辑颜色
+setAttr "remapHsv1.color" -type double3 1 0.156 0.3345;
+
+ setAttr "remapHsv1.hue[1].hue_FloatValue" 1;
+
+ ****第二阶段
+//创建blinn材质的mel //创建remaphsv节点 //链接hsv节点到blinn上 //将材质赋予给模型 //编辑颜色
+以上这几步需要来回做好多次 所以它们可以放在for里面
+global proc rainColor()   //封包
+{
+string $sel[]=`ls -sl`;
+float $f=0;
+for($objects in $sel)
+{
+$f=$f+1.0/size($sel);
+//Create Shader
+
+string $shaderName=`shadingNode -asShader blinn`;
+string $shaderNameSG=`sets -renderable true -noSurfaceShader true -empty -name ($shaderName+"SG")`;
+connectAttr -f ($shaderName+".outColor") ($shaderNameSG+".surfaceShader");
+
+//Create RemapHsv
+string $HsvName=`shadingNode -asUtility remapHsv`;
+
+//Connect Attr
+connectAttr -force ($HsvName+".outColor") ($shaderName+".color");
+
+//Assign Shader
+select -r $objects;
+sets -e -forceElement $shaderNameSG;
+
+//Modify color
+setAttr ($HsvName+".color") -type double3 1 0.156 0.346322 ;
+setAttr ($HsvName+".hue[1].hue_FloatValue") $f;
+}
+}
+rainColor();    //封包好了以后，直接source这个mel就好了
+//做到这里最好做个global proc 封包，因为很多地方都用到了 $sel $i  等，这样会冲突 做个global proc 可以将变量控制在内
+//省去麻烦   还可以将这mel和上一个mel做成一个插件 一个是复制，另一个功能就是着色 
 
 
 
