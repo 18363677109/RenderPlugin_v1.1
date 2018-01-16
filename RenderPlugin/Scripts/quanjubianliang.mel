@@ -650,7 +650,59 @@ rainColor();    //封包好了以后，直接source这个mel就好了
 //做到这里最好做个global proc 封包，因为很多地方都用到了 $sel $i  等，这样会冲突 做个global proc 可以将变量控制在内
 //省去麻烦   还可以将这mel和上一个mel做成一个插件 一个是复制，另一个功能就是着色 
 
+//-------------------------------------------------maya前台批渲染脚本---------------------------------------------------
+//maya的部分命令是基于window的所以前台渲，需要先打开window在点击渲染
 
+global proc NBRender(int $start,int $end,string $path,string $name,string $camera)
+{
+$path = "g:/test/";
+$name = "aaa.";
+$start = 1;
+$end = 24;
+for($i=$start;$i<$end;$i++)
+{
+currentTime $i; //当前帧数就是i想要的帧数
+RenderViewWindow;
+renderWindowRenderCamera ("render","renderView",$camera);
+rnederaWindowSaveImageCallback
+"renderView"
+($path+$name+($i+1)) "image";   //拆分为 路径 名称 帧数号
+}
+}
 
+//界面部分
+if (`window -ex NBRenderWin`) {deleteUI NBRenderWin;}
+window -t "NBRender for QDISA" NBRenderWin;
+columnLayout;
+text -l "start frame";
+intField intStart;
+text -l "end frame";
+intField intend;
+string $cameraNames[]=`listTransforms -camera`;
+optionMenu -label "camera" a;  //a就是 这个optionmenu的值
+        for($i=0;$i<size($cameraNames);$i++) 
+            {menuItem -label $cameraNames[$i];}    //把场景中的一个个camera都列出来
+           
+text -l "image path";   //这里输入框可以宽一点  
+textField -w 400 intpath;
+text -l "image name";
+textField intname;
 
+button -l "render" -c "";
+
+showWindow NBRenderWin;
+window -e -wh 500 360 NBRenderWin;
+
+/*
+ls -ca 列出场景中的camera的shape节点
+listTransforms -camera   列出的不是shape 而是camera的名字
+optionMenu -q -v a; 求叫做a的这个optionMenu的值
+textField -q -tx intpath; 求路径的值
+textField -q -tx intname; 求手动输入的名称值
+  */
+
+global proc linkOfNBRender()
+{
+NBRender(int $start,int $end,string $path,string $name,`optionMenu -q -v a`);
+}
 
