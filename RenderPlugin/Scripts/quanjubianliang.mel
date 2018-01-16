@@ -655,10 +655,6 @@ rainColor();    //封包好了以后，直接source这个mel就好了
 
 global proc NBRender(int $start,int $end,string $path,string $name,string $camera)
 {
-$path = "g:/test/";
-$name = "aaa.";
-$start = 1;
-$end = 24;
 for($i=$start;$i<$end;$i++)
 {
 currentTime $i; //当前帧数就是i想要的帧数
@@ -703,6 +699,162 @@ textField -q -tx intname; 求手动输入的名称值
 
 global proc linkOfNBRender()
 {
-NBRender(int $start,int $end,string $path,string $name,`optionMenu -q -v a`);
+$start = `intField -q -v intStart`;
+$end = `intField -q -v intend`;    
+string $path = `textField -q -tx intpath`;   
+string $name = `textField -q -tx intname`;
+NBRender($start,$end,$path,$name,`optionMenu -q -v a`);
 }
 
+//如果想要中间结束 取消渲染  要做类似于进程管理  prograsswindow就是进程 
+int $amount = 0;
+
+progressWindow 
+        -t "rendering"
+        -prograss $amount
+        -status "Frame: 0%"
+        -isInterruptable true;  //即打断 取消
+while (true)
+{
+if (`progressWindow -query -isCancelled`) break;  //当按了取消 就打断
+
+if (`progressWindow -query -prograss`>=100 ) break; // 当达到某个系数 打断
+
+$amount += 5;
+progressWindow -edit
+    -prograss $amount
+    -status ("Frame: "+$amount+"/"+"" );
+    pause -seconds 1;
+
+}
+progressWindow -endProgress;
+
+
+
+
+
+//********************************NB render code *********************************
+if(`window -ex NBRenderWin`){deleteUI NBRenderWin;}
+window -title "NeroBlack前台渲染脚本NBRender For Maya 2008-2013"
+NBRenderWin;
+columnLayout;
+text -l "Start frame";
+intField inf1;
+text -l "End frame";
+intField inf2;
+string $cameraNames[]=`listTransforms -cameras`;
+optionMenu -label "Camera" a;
+	for($i=0;$i<size($cameraNames);$i++)
+		{menuItem -label $cameraNames[$i];}
+            
+            
+text -l "Path for Render Images";
+textField -w 300 inf3;
+text -l "Name";
+textField inf4;
+button -l "Render" -c "linkOfNBRender";
+showWindow NBRenderWin; 
+window -e -wh 500 300 NBRenderWin;
+
+
+global proc NBRender(int $start,int $end,string $path
+,string $name,string $camera
+)
+{
+for($i=$start;$i<=$end;$i++)
+{
+  int $amount = 0;
+
+     progressWindow
+         -title "Rendering"
+         -progress $amount
+         -status "Frame: 0%"
+         -isInterruptable true;
+
+
+         if ( `progressWindow -query -isCancelled` ) break;
+
+         if ( `progressWindow -query -progress` >= $end ) break;
+
+         $amount = $i;
+
+         progressWindow -edit
+             -progress $amount
+             -status ("Frame: "+$amount+"/"+$end);
+
+currentTime $i ;
+RenderViewWindow;
+renderWindowRenderCamera("render","renderView",$camera);
+renderWindowSaveImageCallback 
+"renderView"  
+($path+$name+($i)) "Maya IFF";}
+  progressWindow -endProgress;
+}
+
+
+
+global proc linkOfNBRender()
+{
+$start =`intField -q -v inf1`;
+$end =`intField -q -v inf2`;
+string $path =`textField -q -tx inf3`;
+string $name =`textField -q -tx inf4`;
+NBRender($start,$end,$path
+,$name,`optionMenu -q -v a`
+);}
+
+//********************************** seed 控制离散率 *********************************
+seed(time+id);  // 随机种子 可以把时间作为种子 数字作为种子 等等
+
+//**********************************    条件 语句的简化     *********************************
+$a=3.14;
+$b=4.28;
+if ($a>$b)
+{print "a is bingger than b";} 
+else
+{print "b is bingger than a";}
+// 上面这句 可以用一句话囊括   用？：  问号和冒号就做了if else条件句
+/* 
+    条件？成立条件：不成立条件;  
+*/
+$a=3.14;
+$b=4.28;
+print($a>$b?"a is bingger than b":"b is bingger than a");  // ：冒号左边是成立条件，右边是不成立条件
+
+//**********************************    optionVar 改变maya默认固有的设置   *******************************
+optionVar -fv "playbackMaxDefault" 200
+-fv "playbackMaxRangeDefault" 200;   //重启就会看到时间轴的变化效果 
+
+//**********************************    system  打开Windows安装的程序  *******************************
+system("start C:/Program Files/Adobe/xxxx/Photoshop.exe");  //注意是反斜线
+这样 常用的浏览器 常用的看图器 工具等就可以放上去
+
+
+//**********************************    whatIs 可以求我们不知道的东西  *******************************
+在脚本编辑器中打开echo all command 可以返回大多数mel指令 对于不能返回的 就要用到whatIs
+whatIs 后面跟想求的东西;  //很大程度上可以得到想要的
+
+//**********************************    about 可返回一些和软件相关的基础信息  *******************************
+打开tooltip help 可以查看有关系的后缀 
+about -ct
+
+
+//**********************************    临时变量的数据类型转换  *******************************
+{
+    int $i = 10;
+}
+{
+    string $i[] = {"10","abc","1314"};
+
+}
+//常规出错是 往往写第一个插件没问题 在声明就出错了，是因为将同一个名称声明了2次，而2次的数据类型不一样
+而各自在自己的大括号内即 global proc内 就不会有问题
+
+
+
+
+//**********************************    改写mel脚本直接执行的方法  *******************************
+ 
+一个插件想直接拖拽即可用 那么就名字（）
+如：
+icQTown();
