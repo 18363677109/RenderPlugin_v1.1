@@ -858,3 +858,37 @@ about -ct
 一个插件想直接拖拽即可用 那么就名字（）
 如：
 icQTown();
+
+
+
+//**********************************   aboutcg mel中级篇  *******************************
+前台渲染增强版 打算新增的功能
+·browse指向目录
+·切换渲染器
+·格式切换   
+·by frame 功能
+·ui优化
+
+//高级版的界面部分 
+if(`window -ex NBRender`){deleteUI NBRender;}
+window -title "QDISA 前台渲染v1.1" NBRender;
+columnLayout;
+
+
+text -l "strat frame";
+intField intf1;
+text -l "end frame";
+intField intf2;
+text -l "camera name";
+string $cameraName[]=`listTransforms -cameras`;
+optionMenuGrp -label "render camera" a;
+for($i=0;$i<size($cameraName);$i++)
+{
+    menuItem -label $cameraName[$i];
+}
+text -l "Path of your images location:";
+textField -w 500 path;
+text -label "Name";
+textField -w 100 name;
+button -label "Render" -c "linkOfNBRender";
+showWindow NBRender;
