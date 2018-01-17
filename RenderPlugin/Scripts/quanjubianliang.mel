@@ -874,6 +874,18 @@ if(`window -ex NBRender`){deleteUI NBRender;}
 window -title "QDISA 前台渲染v1.1" NBRender;
 columnLayout;
 
+optionMenuGrp -cc "MayaRendererChange" -l "Render Using" MayaRenderer; //-cc的意思就是change command 切换指令 链接命令到切渲染的全局变量
+    menuItem -label "mayaSoftware";
+    menuItem -label "mayaHardware";
+    menuItem -label "mentalRay";
+    menuItem -label "MayaKrakatoa";
+
+textFieldButtonGrp -label "Directory" -buttonLabel "Browse" -buttonCommand "getPath" -text (`workspace -q -fullName`+"/images/") MayaRenderPath;
+//文本 框 按钮 组       名称标签         按钮标签              按钮命令             文本框的默认文字     这个textFieldButtonGrp的名字
+//如果想Directory默认的路径是工程指定路径，显得贴心     //getPath是后面做好的全局进程    执行就会弹出对话框
+//workspace -q -fullName        -dir 常用工作目录     -fullName 工程目录
+
+
 
 text -l "strat frame";
 intField intf1;
@@ -886,9 +898,73 @@ for($i=0;$i<size($cameraName);$i++)
 {
     menuItem -label $cameraName[$i];
 }
-text -l "Path of your images location:";
-textField -w 500 path;
+
 text -label "Name";
 textField -w 100 name;
 button -label "Render" -c "linkOfNBRender";
 showWindow NBRender;
+
+// 这里是基础版的内容
+global proc NBRender(int $start,int $end,string $path,string $name,string $camera)
+{
+
+
+for($i=$start;$i<$end;$i++)
+{
+int $amount = 0;
+     progressWindow
+         -title "Rendering"
+         -progress $amount
+         -status "Frame: 0%"
+         -isInterruptable true;
+
+if ( `progressWindow -query -isCancelled` ) break;
+ if ( `progressWindow -query -progress` >= $end ) break;
+$amount = $i;
+progressWindow -edit
+             -progress $amount
+             -status ("Rendering: "+$amount+"/"+$end);
+currentTime $i;
+RenderViewWindow;
+renderWindowRenderCamera("render","renderView", $camera);
+renderWindowSaveImageCallback "renderView"  ($path+$name+$i) "Maya IFF";
+}
+progressWindow -endProgress;}
+
+global proc linkOfNBRender()
+{
+int $stard =`intField -q -v intf1`;
+int $end =`intField -q -v intf2`;
+string $path = `textField -q -tx path`;
+string $name = `textField -q -tx name`;
+string $CameraName=`optionMenuGrp -q -v a`;
+NBRender ($stard,$end,$path,$name,$CameraName);
+}
+
+global proc MayaRendererChange()
+{
+    string $Name = `optionMenuGrp -q -v MayaRenderer`;    //临时变量不出大括号就不怕重名  求当时切换的到底是什么渲染器
+    setCurrentRenderer $Name；;  //然后设置当前的渲染器为我选择的名称  
+
+}
+
+//库脚本
+/* global string 全局变量 可以在 global proc 全局进程之间做数据交换 不仅局限于大括号之内 内部函数不能传递
+
+
+*/
+global proc getPath()
+               {
+                global string $rvbr_pathNameCont;
+                fileBrowserDialog -m 4 -fc setPath -an "select path" ;
+
+                textFieldButtonGrp -e -tx $rvbr_pathNameCont MyRenderPath;  //-e 更新信息，将rvbr_pathNameCont的信息塞到MyRenderPath里
+               }
+global proc setPath(string $vbr_name, string $fileType)
+
+                               {
+                                global string $rvbr_pathNameCont;
+                                $rvbr_pathNameCont = $vbr_name;
+
+                              
+                               }
