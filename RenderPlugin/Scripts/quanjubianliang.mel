@@ -16,7 +16,7 @@ if($whatrender=="arnold"){
 }
 else{
      print ("渲染器不是arnold，切换了");
-     setAttr defaultRenderGlobals.currentRenderer -type "stri   ng" "arnold";
+     setAttr defaultRenderGlobals.currentRenderer -type "string" "arnold";
 }
 setAttr defaultRenderGlobals.currentRenderer -type "string" "arnold";
 
@@ -891,6 +891,10 @@ text -l "strat frame";
 intField intf1;
 text -l "end frame";
 intField intf2;
+text -l "by frame";
+intField -v 1 intf3;
+
+
 text -l "camera name";
 string $cameraName[]=`listTransforms -cameras`;
 optionMenuGrp -label "render camera" a;
@@ -899,9 +903,17 @@ for($i=0;$i<size($cameraName);$i++)
     menuItem -label $cameraName[$i];
 }
 
+optionMenuGrp -label  "File Format" FileFormat;
+    menuItem -l "MayaIFF";
+    menuItem -l "JPEG";
+    menuItem -l "TIFF";
+
+
 text -label "Name";
 textField -w 100 name;
-button -label "Render" -c "linkOfNBRender";
+button -label "Render" -c "linkOfNBRender" -wh 500 50;
+button -label "close" -c "deleteUI NBRender" -wh 500 50;
+window -e -wh 500 450 NBRender; //这里的意思是以这里的-e刷新后的宽高为准 之前window定义的不作数了 
 showWindow NBRender;
 
 // 这里是基础版的内容
@@ -909,7 +921,7 @@ global proc NBRender(int $start,int $end,string $path,string $name,string $camer
 {
 
 
-for($i=$start;$i<$end;$i++)
+for($i=$start;$i<$end*`intField -q -v intf3`;$i++)
 {
 int $amount = 0;
      progressWindow
@@ -919,15 +931,15 @@ int $amount = 0;
          -isInterruptable true;
 
 if ( `progressWindow -query -isCancelled` ) break;
- if ( `progressWindow -query -progress` >= $end ) break;
+ if ( `progressWindow -query -progress` >= $end*`intField -q -v intf3` ) break;
 $amount = $i;
 progressWindow -edit
              -progress $amount
-             -status ("Rendering: "+$amount+"/"+$end);
-currentTime $i;
+             -status ("Rendering: "+$amount+"/"+$end*`intField -q -v intf3`);
+currentTime $i*(1.0/`intField -v 1 intf3`);
 RenderViewWindow;
 renderWindowRenderCamera("render","renderView", $camera);
-renderWindowSaveImageCallback "renderView"  ($path+$name+$i) "Maya IFF";
+renderWindowSaveImageCallback "renderView"  ($path+$name+$i) `optionMenuGrp -q -v FileFormat`;
 }
 progressWindow -endProgress;}
 
@@ -935,7 +947,7 @@ global proc linkOfNBRender()
 {
 int $stard =`intField -q -v intf1`;
 int $end =`intField -q -v intf2`;
-string $path = `textField -q -tx path`;
+string $path = `textFieldButtonGrp -q -text MyRenderPath`;
 string $name = `textField -q -tx name`;
 string $CameraName=`optionMenuGrp -q -v a`;
 NBRender ($stard,$end,$path,$name,$CameraName);
@@ -944,7 +956,7 @@ NBRender ($stard,$end,$path,$name,$CameraName);
 global proc MayaRendererChange()
 {
     string $Name = `optionMenuGrp -q -v MayaRenderer`;    //临时变量不出大括号就不怕重名  求当时切换的到底是什么渲染器
-    setCurrentRenderer $Name；;  //然后设置当前的渲染器为我选择的名称  
+    setCurrentRenderer $Name;  //然后设置当前的渲染器为我选择的名称  
 
 }
 
@@ -958,8 +970,8 @@ global proc getPath()
                 global string $rvbr_pathNameCont;
                 fileBrowserDialog -m 4 -fc setPath -an "select path" ;
 
-                textFieldButtonGrp -e -tx $rvbr_pathNameCont MyRenderPath;  //-e 更新信息，将rvbr_pathNameCont的信息塞到MyRenderPath里
-               }
+                textFieldButtonGrp -e -tx ($rvbr_pathNameCont+"/") MyRenderPath;  //-e 更新信息，将rvbr_pathNameCont的信息塞到MyRenderPath里
+               }                       // 在求得的路径后面还加了/ 反斜线路径符
 global proc setPath(string $vbr_name, string $fileType)
 
                                {
@@ -968,3 +980,156 @@ global proc setPath(string $vbr_name, string $fileType)
 
                               
                                }
+//********************************************** 粒子拉线插件  *****************************************
+·粒子产生曲线   ls粒子数  for 粒子建立曲线  for 粒子延长曲线
+·曲线挤出曲面    for 曲线 extrude 曲面
+
+string $sel[]= `filterExpand -sm 47`;    //选择粒子中的每一个
+//凡是列出元素的 点 线 面 用 filterExpand 
+
+if(`window -ex PTLT`){delteUI PTLT;}
+string $window = `window -t (" NeroBlack ParticleToLines Tool Version 1.0 ") -menuBar true PTLT` ;
+columnLayout -adjustableColumn true;
+	button -bgc 0.7 0.9 0.7 -label "ParticleToLines"   -align "center"   -h 40 -c "particleToLines";
+	button -bgc 0.9 0.6 0.7 -label "LinesToTubes" -align "center" -h 40 -c "linesToTubes";
+showWindow $window;
+window -e -wh 500 400 PTLT;
+global proc particleToLines()
+{   
+   //for curve
+string $sel[]=`filterExpand -sm 47`;
+for($i=0;$i<size($sel);$i++)
+{
+    float $particlePos[]=`getParticleAttr -at position $sel[$i]`;
+    string $cvName=`curve -d 3 -p $particlePos[0] $particlePos[1] $particlePos[2]`;
+    rename  $cvName ("curveNew"+($i+1));
+}
+//for Time
+for($j=`playbackOptions -q -min`;$j< `playbackOptions -q  -max` ;$j++)
+{       
+    currentTime ($j+1);
+    for($i=0;$i<size($sel);$i++)
+    {
+    
+        float $particlePos[]=`getParticleAttr -at position $sel[$i]`;
+        curve -a -p $particlePos[0] $particlePos[1] $particlePos[2] ("curveNew"+($i+1));
+    }
+}     
+}
+global proc linesToTubes()
+{       
+string $cvName[]=`circle -c 0 0 0 -nr 0 1 0 
+        -sw 360 -r 0.03 -d 3 -ut 0 -tol 0.01 
+        -s 8 -ch 1`;         
+string $Lines[]=`ls "curveNew*"`;
+for($a in $Lines)
+{
+ extrude -ch true -rn true -po 0 -et 2 -ucp 1 
+        -fpt 1 -upn 1 -rotation 0 -scale 1 
+           -rsp 1 $cvName[0] $a;   
+}
+}
+
+
+    //maya常规命
+//eval  执行但不会显示，就相当于Ctrl+Enter
+可以将一个mel 做成个string 然后 eval 这个 string 
+
+print 显示 输出的内容一定是字符串
+print （“hello world ！ ”） //养成好习惯 加个括号 虽然不加也没错
+// print （12）； //这个12其实也是字符串类型的信息
+int $a=1; 
+int $b=2;
+print ($1+$2);  结果是3
+
+string $a1=1;
+string $b1=2;
+print ($a1+$b1); 结果是12
+
+
+//system 系统指令 win mac linux 各有各自的指令
+system("calc");  //计算机 
+system("cmd");   //命令行
+要用 system 命令打开特定文件 记得路径反斜线  执行exe要加 start   
+
+system("start X:/Maya特效师脚本编程Mel教程 中级篇 part02");
+
+//*****************************************高级字符串***********************************/
+·tokenize  分裂
+·size/clear  测量 清理
+·sizeBytes/substring  测量字符 细分字符
+·substitute/match    替换字符 
+·正则表达式
+·match
+· .*+^$\ [...] (...)
+
+
+//Tokenize 分裂 格式
+string $buffen[];    //先声明数组类型的字符串 因为分裂的信息肯定是好几个
+$numToken = `tokenize "20:16:60" ":" $buffer`;  //20:16:60这个字符 用：作为区分依据分为新的字符 放入$buffer中
+print $buffer
+
+
+//size/clear 格式******************************************
+//size一般用于测量
+
+string $sel[]=`ls -sl`;
+size($sel);
+
+for ($i=0;$i<size($sel);$i++)
+{print $sel[$i];}
+
+global string $A[];
+$A=`ls -sl`;
+clear($A);
+
+//clear 比如下面这个 $A用了很多次 不干净了 想再用 就要clear做清理
+for($i=0;$i<size(`ls -sl`);$i++)
+{
+    global string $A[];
+    $A[$i] = $sel[size(`ls -sl`)-1-$i];
+}
+print $A;
+
+clear $A; //清除完 再print 就会发现 啥也没有
+print $A;  
+
+//sizeBytes/substring
+//sizeBytes  用于测量数组的字符长
+sizeBytes "hello world!"
+//结果是12 
+
+//substring 细分字符串
+substring "hello world" 1 5 // 意思是得到 第一个至第五个字符内容
+string $test = "my name is hanmeimei";
+substring $test (sizeBytes($test)-9) (sizeBytes($test));
+//结果 hanmeimei 
+
+//substitute 把2中的1替换成3
+substitute "I" "I name is hanmeimei" "my"
+//结果  my name is hanmeimei 
+
+//物体shape节点是管渲染的 物体transform节点是管位移等属性的 
+/*如果ls -sl了shape节点 想选择transform节点 除了pickWalk -d up之外
+还可以用substitu替换 来做  */
+string $meshName[] = `ls -type "mesh"`;  //选择场景中所有 类型为模型
+fo($i=0;$i<size(meshName);$i++)
+{$meshName[$i]=`substitute "Shape" $meshNmae[$i] ""`;}
+//将所有meshname里的shape后缀替换为“”空 这样就选择了transform节点
+select $meshName;   //相当于把后缀去掉了在返回写入给meshName这个变量里  就得到了选择transform节点的目的  
+
+
+//********************************match**********************************
+正则表达式 类似于过滤 条件匹配
+.   可以匹配任何东西
+*   至少匹配0个或者更多字符 
++   至少匹配1个或者更多字符
+^   匹配开头
+$   匹配结尾
+\   转意  如果要匹配的字符串中本身有.*-+等 就会得不到想要的结果 用\\
+    来转意 有时候一个\不够就需要两个\\
+[...] 
+(...)
+
+        \\..*  杠杠点点星 求出.之后的任何东西
+match "010"  "010 7028654";
