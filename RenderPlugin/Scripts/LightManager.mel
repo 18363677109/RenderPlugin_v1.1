@@ -1,29 +1,25 @@
-//-*- coding: utf-8 -*-
-//file :LightAssetManager
-//author:u'å¸¸æ±Ÿ'
-//email:316684752@qq.com
-//date:2018.01.08
+global string $lightAssetPath = "L:/Light_assets";    //L:/Light_assets ;
 
-//fileå‘½ä»¤æ˜¯è¿™ä¸€éƒ¨åˆ†çš„é‡è¦å‘½ä»¤ file -import å¯¼å…¥ -loc ä½ç½®  
-
-//hudmessage é™„åŠ åˆ°æ–°å¯¼å…¥çš„ç¯å…‰ä¸Šï¼Œè¿™æ ·å°±æé†’äº†åˆ¶ä½œäººæ–°çš„ç¯å…‰åœ¨å“ª
-headsUpMessage -object aiAreaLight1 -time 5 "ç¯å…‰å·²å¯¼å…¥";
-
-inViewMessage -smg " ç¯å…‰å·²å¯¼å…¥" -pos midCenter -bkc 0x00000000 -fade;
-
-//ls -lt åˆ—å‡ºç¯å…‰
-
-//å®å“¥æƒ³åŠ å…¥é«˜ä½æ¨¡å‹åˆ‡æ¢åŠŸèƒ½ éœ€è¦ç”¨åˆ°åŸºç¡€ç«æ˜ŸmelåŸºç¡€ç¬¬28è¯¾å·¦å³çš„å†…å®¹ï¼Œç»‘å®šæ—¶éœ€è¦æœ‰é«˜ä½æ‘¸ï¼Œå¹¶æœ‰
-//åœ¨channel boxä¸­åŠ å…¥ä¸€æ¡å±æ€§ï¼Œç„¶åå†™ä¸ªå·¥å…·æ•´ä½“å°†é€‰ä¸­éƒ¨åˆ†çš„é«˜æ¨¡åˆ‡æ¢ä¸ºä½æ¨¡ ç­‰åŠŸèƒ½
+global string $FNlightIconPath;
+       string $FNlightIconPath = "L:/Light_assets/Light_Script_Library/icons/flippedNormals_icon/";
+  
+global string $VCblIconPath;     //videocopilot»ú¹¹ ±³¾°¹âµÄÂ·¾¶
+        string $VCblIconPath = "L:/Light_assets/Light_Script_Library/icons/vc_light/BackLight/";  
 
 
-//-----------------------------------------------ç•Œé¢éƒ¨åˆ†---------------------------------------------
+       
+
+
+
+
+//-----------------------------------------------½çÃæ²¿·Ö---------------------------------------------
+
 if( `window -exists $lightManagerWindow` )
 {
     deleteUI  $lightManagerWindow;
     
 }
-string $lightManagerWindow = `window -widthHeight 1280 720 lightManagerWindow `;
+string $lightManagerWindow = `window -widthHeight 1300 760 lightManagerWindow `;
 string $form = `formLayout`;
 string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;
 formLayout -edit
@@ -33,74 +29,70 @@ formLayout -edit
      -attachForm $tabs "right"  0
      $form;
 
-//å®šä¹‰ç¬¬1æ çš„å…¨éƒ¨æŒ‰é’®iconTextButtonå’Œç•Œé¢
+//¶¨ÒåµÚ1À¸µÄÈ«²¿°´Å¥iconTextButtonºÍ½çÃæ
      string $child1 = `rowColumnLayout -numberOfColumns 8`;
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-          
-         button; button; button;button; button; button;
 
+        int $buttonCreateNumber01;
+        int $buttonFinalNumber01 = 13;  //12 ÊÇ´´½¨ÒÔÒ»¸ö½çÃæµÄ¸öÊı
+        for ($buttonCreateNumber01=1;$buttonCreateNumber01<$buttonFinalNumber01;$buttonCreateNumber01++)    
 
+        {
+        iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" 
+        -i ($FNlightIconPath + "light_"+($buttonCreateNumber01)+"_GRP.jpg") -l ("Ó°ÅïµÆ¹â"+($buttonCreateNumber01)) -c " "; 
+        }
+
+        // iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -i ($FNlightIconPath + "light_01_GRP.jpg") -l "Ó°ÅïµÆ¹â01" -c " ";
+        // iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -i ($FNlightIconPath + "light_02_GRP.jpg") -l "Ó°ÅïµÆ¹â02" -c " ";
+        
 
          setParent ..;
 
-//å®šä¹‰ç¬¬2æ çš„å…¨éƒ¨æŒ‰é’®iconTextButtonå’Œç•Œé¢
-     string $child2 = `rowColumnLayout -numberOfColumns 6`;
+//¶¨ÒåµÚ2À¸µÄÈ«²¿°´Å¥iconTextButtonºÍ½çÃæ
 
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" -image1 "sphere.png" -label "sphere" -c "  ";
-         button; button; button;
-         setParent ..;
+     string $child2 = `scrollLayout -horizontalScrollBarThickness 16 -verticalScrollBarThickness   16`;
+     rowColumnLayout -numberOfColumns 4;
+         
+     int $buttonCreateNumber02;      
+        int $buttonFinalNumber02 = 52;  //    51ÊÇ´´½¨hdr°´Å¥µÄ¸öÊı
+        for ($buttonCreateNumber02=0;$buttonCreateNumber02<$buttonFinalNumber02;$buttonCreateNumber02++)    
 
-//å®šä¹‰ç¬¬3æ çš„å…¨éƒ¨æŒ‰é’®iconTextButtonå’Œç•Œé¢
-     string $child3 = `frameLayout -label "å…¶ä»–ç¯å…‰" -cll true -bs "in" -bv true`;
+        {
+        iconTextButton -h 160 -w 320 -st "iconAndTextVertical" -style "textOnly" 
+        -i ($VCblIconpath + "BackLight_4K_"+($buttonCreateNumber02)+".jpg") -l ("»·¾³¹â"+($buttonCreateNumber02)) -c " "; 
+        }
+         setParent ..; 
+        setParent ..; 
+//¶¨ÒåµÚ3À¸µÄÈ«²¿°´Å¥iconTextButtonºÍ½çÃæ
+     string $child3 = `frameLayout -label "ÆäËûµÆ¹â" -cll true -bv true`;
                 rowColumnLayout -nc 6; 
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰01 åŒå‡»åˆ é™¤" -c "  " -dcc " ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹â01 Ë«»÷É¾³ı" -c "  " -dcc " ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextCentered" -i1 "sphere.png" -l "Ó°ÅïµÆ¹â02" -c " ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
                 setParent ..;
-                 frameLayout -label "å¦ä¸€ç±»ç¯å…‰" -cll true -bs "in" -bv true;
+                
+                 frameLayout -label "ÁíÒ»ÀàµÆ¹â" -cll true  -bv true;
             rowColumnLayout -nc 8;
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "ç¯å…‰æ¸…ç†" -c "  ";
-                setParent ..;
-        	setParent ..;
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 ($FNlightIconPath + "light_01_GRP.jpg") -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "µÆ¹âÇåÀí" -c "  ";
+    
 
            
 
 
      tabLayout -edit
-         -tabLabel $child1 "æ—¥å…‰" -tabLabel $child2 "å®¤å†…" -tabLabel $child3 "é‡å¤–"
+         -tabLabel $child1 "Ó°ÅïµÆ¹âÔ¤Éè" -tabLabel $child2 "»·¾³¹âSkydome_light" -tabLabel $child3 "Ò°Íâ"
          $tabs;
 
-
-
-    showWindow;
-
+    showWindow lightManagerWindow;
