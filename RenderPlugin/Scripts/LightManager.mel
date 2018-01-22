@@ -6,7 +6,13 @@ global string $FNlightIconPath;
 global string $VCblIconPath;     //videocopilot机构 背景光的路径
         string $VCblIconPath = "L:/Light_assets/Light_Script_Library/icons/vc_light/BackLight/";  
 
+global string $VCblIconpathSL;     //videocopilot机构 单灯按钮的路径
+        string $VCblIconpathSL = "L:/Light_assets/Light_Script_Library/icons/vc_light/LightMaps/single_lights/";
+    
 
+global string $VCblIconpathLA1;     //videocopilot机构 阵列1x15_Rectangle按钮的路径
+        string $VCblIconpathLA1 = "L:/Light_assets/Light_Script_Library/icons/vc_light/LightMaps/Light_Arrays/1x15_Rectangle/";
+       
        
 
 
@@ -19,7 +25,8 @@ if( `window -exists $lightManagerWindow` )
     deleteUI  $lightManagerWindow;
     
 }
-string $lightManagerWindow = `window -widthHeight 1300 760 lightManagerWindow `;
+string $lightManagerWindow = `window -widthHeight 1300 760 -title "QDISA 灯光资产管理工具V1.1" lightManagerWindow`;
+
 string $form = `formLayout`;
 string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;
 formLayout -edit
@@ -37,7 +44,7 @@ formLayout -edit
         for ($buttonCreateNumber01=1;$buttonCreateNumber01<$buttonFinalNumber01;$buttonCreateNumber01++)    
 
         {
-        iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -style "textOnly" 
+        iconTextButton -h 80 -w 160 -st "iconAndTextVertical"
         -i ($FNlightIconPath + "light_"+($buttonCreateNumber01)+"_GRP.jpg") -l ("影棚灯光"+($buttonCreateNumber01)) -c " "; 
         }
 
@@ -57,42 +64,47 @@ formLayout -edit
         for ($buttonCreateNumber02=0;$buttonCreateNumber02<$buttonFinalNumber02;$buttonCreateNumber02++)    
 
         {
-        iconTextButton -h 160 -w 320 -st "iconAndTextVertical" -style "textOnly" 
+        iconTextButton -h 160 -w 320 -st "iconAndTextVertical" 
         -i ($VCblIconpath + "BackLight_4K_"+($buttonCreateNumber02)+".jpg") -l ("环境光"+($buttonCreateNumber02)) -c " "; 
         }
          setParent ..; 
         setParent ..; 
 //定义第3栏的全部按钮iconTextButton和界面
-     string $child3 = `frameLayout -label "其他灯光" -cll true -bv true`;
-                rowColumnLayout -nc 6; 
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光01 双击删除" -c "  " -dcc " ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextCentered" -i1 "sphere.png" -l "影棚灯光02" -c " ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                setParent ..;
-                
-                 frameLayout -label "另一类灯光" -cll true  -bv true;
-            rowColumnLayout -nc 8;
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 ($FNlightIconPath + "light_01_GRP.jpg") -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
-                iconTextButton -h 80 -w 160 -st "iconAndTextVertical" -i1 "sphere.png" -l "灯光清理" -c "  ";
+     string $child3 = `scrollLayout -horizontalScrollBarThickness 16 -verticalScrollBarThickness   16`;
+                frameLayout -label "单排灯光" -cll true -bv true;
+                rowColumnLayout -numberOfColumns 5; 
+        int $buttonCreateNumber03a;      
+        int $buttonFinalNumber03a = 32;  //  
+        for ($buttonCreateNumber03a=0;$buttonCreateNumber03a<$buttonFinalNumber03a;$buttonCreateNumber03a++)    
+
+        {
+        iconTextButton -h 90 -w 240 -st "iconAndTextVertical"
+        -i ($VCblIconpathSL + "Single_Lights_2K_"+($buttonCreateNumber03a)+".jpg") -l ("单排灯光"+($buttonCreateNumber03a)) -c " "; 
+        }
+          
+        setParent ..;
+        setParent ..;
+
+        frameLayout -label "灯光阵列1X15" -cll true -bv true;
+            rowColumnLayout -numberOfColumns 5; 
+        int $buttonCreateNumber03b;      
+        int $buttonFinalNumber03b = 14;        // 03b就是1x15     这栏总共14个灯
+        for ($buttonCreateNumber03b=0;$buttonCreateNumber03b<$buttonFinalNumber03b;$buttonCreateNumber03b++)    
+
+        {
+        iconTextButton -h 90 -w 240 -st "iconAndTextVertical" 
+        -i ($VCblIconpathLA1 + "1x15_Rectangle_2K_"+($buttonCreateNumber03b)+".jpg") -l ("单个灯光"+($buttonCreateNumber03b)) -c " "  -dcc " "; 
+        }
     
+        setParent ..;
+        setParent ..;                
+                
 
            
 
 
      tabLayout -edit
-         -tabLabel $child1 "影棚灯光预设" -tabLabel $child2 "环境光Skydome_light" -tabLabel $child3 "野外"
+         -tabLabel $child1 "影棚灯光预设" -tabLabel $child2 "环境光Skydome_light" -tabLabel $child3 "人造光源"
          $tabs;
 
     showWindow lightManagerWindow;
