@@ -13,7 +13,8 @@ global string $VCblIconpathSL;     //videocopilot机构 单灯按钮的路径
 global string $VCblIconpathLA1;     //videocopilot机构 阵列1x15_Rectangle按钮的路径
         string $VCblIconpathLA1 = "L:/Light_assets/Light_Script_Library/icons/vc_light/LightMaps/Light_Arrays/1x15_Rectangle/";
        
-       
+global string $VCblIconpathLA2;     //videocopilot机构 阵列2x4_Round按钮的路径
+        string $VCblIconpathLA2 = "L:/Light_assets/Light_Script_Library/icons/vc_light/LightMaps/Light_Arrays/2x4_Round/";  
 
 
 
@@ -93,11 +94,25 @@ formLayout -edit
 
         {
         iconTextButton -h 90 -w 240 -st "iconAndTextVertical" 
-        -i ($VCblIconpathLA1 + "1x15_Rectangle_2K_"+($buttonCreateNumber03b)+".jpg") -l ("单个灯光"+($buttonCreateNumber03b)) -c " "  -dcc " "; 
+        -i ($VCblIconpathLA1 + "1x15_Rectangle_2K_"+($buttonCreateNumber03b)+".jpg") -l ("灯光阵列1X15_"+($buttonCreateNumber03b)) -c " "  -dcc " "; 
         }
     
         setParent ..;
-        setParent ..;                
+        setParent ..;          
+
+        frameLayout -label "灯光阵列2X4" -cll true -bv true;
+        rowColumnLayout -numberOfColumns 5; 
+        int $buttonCreateNumber03c;      
+        int $buttonFinalNumber03c = 15;        // 03c就是1x15     这栏总共14个灯
+        for ($buttonCreateNumber03c=0;$buttonCreateNumber03c<$buttonFinalNumber03c;$buttonCreateNumber03c++)    
+
+        {
+        iconTextButton -h 90 -w 240 -st "iconAndTextVertical" 
+        -i ($VCblIconpathLA2 + "2x4_Round_2K_"+($buttonCreateNumber03c)+".jpg") -l ("灯光阵列2X4_"+($buttonCreateNumber03c)) -c " "  -dcc " "; 
+        }
+    
+        setParent ..;
+        setParent ..;          
                 
 
            
