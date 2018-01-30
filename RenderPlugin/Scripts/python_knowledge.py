@@ -80,8 +80,42 @@ else:
 for($i=0;$i<100;$i++)
 
 #python写法 
-for i in range(100):  #加了冒号就自动带缩进 
+for i in range(100):  #加了冒号就自动带缩进   range()其实是占内存比较多的一种算法，意思是从1-100都干什么事  
     if i %2==0:      #如果只想得到偶数序列    如果想达到奇数的话  就写 if i %2!=0 或者 if i %2==1
         print i
 
+for i in [1,5,0,48,115]：
+    if i %1!=0:
+        print i
+
+from pymel.core import *  # *的意思是所有
+for i in ((0,1,0),(1,0,0),(0,0,1)):
+    circle(nr=i)
+# 这就是pymel 语法是py 但是命令都是mel    
+    
+
 #元组 （） 内容写入后，不能被更改 信息很安全 
+
+#控制流    while 
+# 类似于for循环   for是一个有限的循环100次 1000次等等  while会不停的侦测一个东西是否达到条件，倾向于不可数的次数的循环 （while写的出无限循环）
+n=0
+while n <10:
+    n=n+1
+    print n
+    if n>5:
+        break  #如果大于5 就打断循环
+    if n<5:
+        continue #如果小于5就忽略以下脚本
+    print ("hello world!")
+
+# 实战案例猜数字脚本   
+import random
+number = int(random.uniform(1,100))
+while True:
+    i = int (input('i guess the number is'))
+    if i > number:
+        print('a little bigger')
+    if i < number:
+        print('a little smaller')
+    if i == number:
+        break
