@@ -111,11 +111,96 @@ while n <10:
 # 实战案例猜数字脚本   
 import random
 number = int(random.uniform(1,100))
+n=0
 while True:
+    n=n+1
     i = int (input('i guess the number is'))
     if i > number:
         print('a little bigger')
     if i < number:
         print('a little smaller')
     if i == number:
+        print('congtatulations! \n','you have geuused',n,'times!')
         break
+
+# ************************************函数
+·什么是函数 ·定义函数 ·函数的参数 ·函数的注释 ·函数中的变量 ·return ·递归 
+
+·什么是函数
+#这里的函数意思是一种封包，类似于mel里的porc，global proc 
+len 和 range 等就可以说是内置好的函数，除此之外当然可以自制函数  
+
+·定义函数的参数 
+def helloWorld():
+    print('hello world ! ')
+
+helloWorld ## Result: <function helloWorld at 0x000000003D0AD978> #   直接helloWorld 它会告诉说你在内存中占用的位置】
+helloWorld()   #加上小括号，这才是正确的写法  这就是一个没有参数也没有变量的函数 
+
+def bijioadaxiao(a,b):
+    if a > b:
+        print (a,"is bigger than",b)
+    if a == b:
+        print (a,"is same as",b)
+
+bijioadaxiao (3.48594*7.8,2.66*4.524+8)       
+
+#注释 
+中文注释写  # coding = utf-8
+内容里这么些    print (u'中文')
+
+#实战阶乘
+#fn(n) = n!    fn(4) = 4*3*2*1       fn(1) = 1
+
+def fn(n):
+    result = 1
+    for i in range(n):
+        result *= (i+1) 
+    return result 
+fn(3)
+# Result: 6 # 
+
+#递归  逻辑更清晰化，是逻辑的循环而不是语法的循环 
+#fn(n) = n*fn(n-1)
+def fn(n):
+    if n > 1:
+        return (n*fn(n-1))
+    in n == 1:
+        return 1
+    else:
+        print 'error!'
+fn(10)
+
+
+# 数据结构 
+·list  ·tuple  ·dict  ·str  ·set
+
+list1 = [1,3,4,2.55,'black',[12,6,8,822],(1.5,6,80)]  #列表可以有整数，浮点，字符串，列表，元组
+list1[-1]  #就是列表里最后一个
+#切片
+·t[0]       #第一个
+·t[-1]      #最后一个
+·t[1:3]     #第一个到第三个之间
+·t[1:-1]    #第二个开始至倒数第二个结束
+·t[:]       #全部
+list1[0:5:2]  #从头开始到第五个 每2个取一次  在类似maya建模 等需要隔物取值的场合用处较多      list[：：2]从头到尾每隔2取值 
+
+
+frpm pymel.core import *
+select(ls(sl=1) [::2])   #建了很多盒子 这样可以隔着选    #这就是切片对数据的操作
+
+
+·tuple 和list的区别
+list1 = [1,2,3]
+tuple1 = (4,5,6)
+
+lsit1[0] = 10  #这是给数组里的第一个从新赋值  可以赋值
+tuple1[0] = 10   #会发现报错，元组不可以被改变
+
+#dict 就是字典 
+dict = {'a':'this','b':'that' }          #一个关键字对应一个结果
+dict[0]   #这样访问时不对的
+dict['a']  #像这样直接访问关键字 
+len(dict)  #测量字典长度
+
+# 实战案例 翻译机 
