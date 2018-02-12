@@ -339,6 +339,106 @@ print('ok,your calculation is done ! ')
 print('the result is ...')
 
 # raise exception 限制非法操作 抛出异常，给用户一定警告性
+def compare(num):
+    a = 50
+    if num < 0:
+        raise Exception('ERROR: your number is not suit ,it is smaller than zero ! ')
+    if num > a:
+        print(str(num),'is bigger than 50')
+    if num < a:
+        print(str(num),'is smaller than 50')
+    if num == a:
+        print(str(num),'is same as 50')
+for i in [15,33,55,-65,77,98]:                #很多时候的错误可能是由于没注意逗号和冒号 
+    try:
+        print(compare(i))                   #抛出错误 告诉了-65不对，其他的还能正确的运行 
+    except Exception as e:
+        print(str(i),str(e))
+
+# Python 标准库   
+导入模块有这么几种形式  ·import m       ·from m import f        ·from m import *
+# · import    以前经常会有这么一句话 from pymel.core import *       每个模块就像一个个打包好的库
+
+import pymel.core as pm   #这样就用pm这个简写，指代了 pymel.core这句话 
+上面是第一种写法，也可以像下面这么写
+import pymel.core
+pm = pymel.core
+
+pm.ls(sl=1)
+pm.parent
+
+# from m import f
+import random
+random.randint(1,5)  #这样的写法还是有点麻烦 想用下面这种简单的写法 
+randint(1,5)    #直接这么写会出错，那么就要下面这么引入
+
+from random import randint
+randint(1, 5)  #开始就明确表示了要引入的具体内容，randint已经是一个global的namespace
 
 
+from random import *   #这个通配符表示引入了random函数下的所有
+uniform(1, 8)
+那么 from pymel.core import *  就好理解了 意思是导入所有的 pymel.core的模块 执行之后发现可以直接调用很多命令
+ls() addAttr等等 
+
+##关于path 
+import pymel.core
+pm.__file__
+# Result: 'C:\\Program Files\\Autodesk\\Maya2016\\Python\\lib\\site-packages\\pymel\\core\\__init__.pyc' # 
+返回了模块的路径   
+·PYTHONPATH   
+·sys.path 
+
+import sys   
+sys.path      #会发现下面返回了超级多的东西      一个名字叫 Result[] 的列表 
+# Result: ['C:\\Program Files\\Autodesk\\Maya2016\\bin',
+ 'C:\\ProgramData\\Redshift\\Plugins\\Maya\\Common\\scripts',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\bifrost\\scripts\\presets',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\bifrost\\scripts',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\fbx\\scripts',
+ 'C:\\Program Files\\Autodesk\\mentalrayForMaya2016\\scripts\\AETemplates',
+ 'C:\\Program Files\\Autodesk\\mentalrayForMaya2016\\scripts\\mentalray',
+ 'C:\\Program Files\\Autodesk\\mentalrayForMaya2016\\scripts\\NETemplates',
+ 'C:\\Program Files\\Autodesk\\mentalrayForMaya2016\\scripts\\unsupported',
+ 'C:\\Program Files\\Autodesk\\mentalrayForMaya2016\\scripts',
+ 'C:\\solidangle\\mtoadeploy\\2016\\scripts',
+ 'C:\\Yeti-v2.0.8_Maya2016-windows64\\scripts',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\substance\\scripts',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\cafm',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\ui',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\xmaya',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\ui\\brushes',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\ui\\dialogs',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\ui\\fxmodules',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\ui\\tabs',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\ui\\util',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts\\xgenm\\ui\\widgets',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\plug-ins\\xgen\\scripts',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\bin\\python27.zip',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\Python\\DLLs',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\Python\\lib',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\Python\\lib\\plat-win',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\Python\\lib\\lib-tk',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\bin',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\Python',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\Python\\lib\\site-packages',
+ 'C:\\Program Files\\Autodesk\\Maya2016\\bin\\python27.zip\\lib-tk',
+ u'D:/Documents/maya/2016/prefs/scripts',
+ u'D:/Documents/maya/2016/scripts',
+ u'D:/Documents/maya/scripts',
+ 'C:\\solidangle\\mtoadeploy\\2016\\extensions'] # 
+ 
+import maya.OpenMaya
+dir(maya.OpenMaya)
+#找到了一个函数想具体的看看内容 可以像下面这样写
+help(maya.OpenMaya.setRefValue)
+
+getenv PYTHONPATH;     ## getenv PYTHONPATH;这个mel会得到所有的环境变量改动值 
+// Result: C:/ProgramData/Redshift/Plugins/Maya/Common/scripts;C:/Program Files/Autodesk/Maya2016/plug-ins/bifrost/scripts/presets;C:/Program Files/Autodesk/Maya2016/plug-ins/bifrost/scripts;C:/Program Files/Autodesk/Maya2016/plug-ins/fbx/scripts;C:/Program Files/Autodesk/mentalrayForMaya2016/scripts/AETemplates;C:/Program Files/Autodesk/mentalrayForMaya2016/scripts/mentalray;C:/Program Files/Autodesk/mentalrayForMaya2016/scripts/NETemplates;C:/Program Files/Autodesk/mentalrayForMaya2016/scripts/unsupported;C:/Program Files/Autodesk/mentalrayForMaya2016/scripts;C:/solidangle/mtoadeploy/2016/scripts;C:/Yeti-v2.0.8_Maya2016-windows64/scripts;C:/Program Files/Autodesk/Maya2016/plug-ins/substance/scripts;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/cafm;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/ui;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/xmaya;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/ui/brushes;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/ui/dialogs;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/ui/fxmodules;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/ui/tabs;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/ui/util;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts/xgenm/ui/widgets;C:/Program Files/Autodesk/Maya2016/plug-ins/xgen/scripts // 
+
+
+
+# 编写模块    __init__.py      __all__=[sub1,sub2]      让模块在import时候做点事情 
+    之前都是导入一些模块，引入别人写好的，但是一旦有了自己特定的需求，就需要编写模块。模块必须有__init__.py这个文件 
 
