@@ -1,4 +1,7 @@
  #******************************************aboutcg python教程*******************************************************
+
+aboutcg账号 changjiang171 bigbang
+
  场景过大 比如将球的xyz位移值为400万 会发现球已经不是球了  maya的容差值已经不能很好的控制模型了 所以软件里 模型不能过大或过小
 
 #字符串 用 str   mel里是“”号表示 而py里可以用 'wwe' "abc"   '''qdisa'''  单引号 双引号 或三引号 来表示 是为了方便嵌套 单引号嵌套双引号
@@ -204,3 +207,138 @@ dict['a']  #像这样直接访问关键字
 len(dict)  #测量字典长度
 
 # 实战案例 翻译机 
+#在做一些数据库时 dict时非常有用的 
+
+__author__ = 'NeroBlack'
+DICT = {
+    'i':u'我',
+    'my':u'我的',
+    'is':u'是',
+    'name':u'名字',
+    'that':u'那',
+    'like':u'喜欢',
+    'computergraphic':u'计算机艺术',
+    'especially':u'尤其是',
+    'learning':u'学习',
+    'english':u'英语',
+    'life':u'生活',
+   }
+TEXT = '''My name is NeroBlack
+I like computergraphic especially vfx
+I like learning English
+That is my life'''
+def translateWord(word):
+    conv = word.lower() # 全变成小写
+    if conv not in DICT:     #这是py接近自然语言的地方  not in 表示 word 不在dict里
+        return word
+    return DICT[conv]
+def translateSentence(sentence):
+    words = sentence.split(' ')
+    chineseSentence = ''
+    for w in words:
+        chineseSentence += translateWord(w)
+    return chineseSentence
+def translateText(text):
+    sentences = text.split('\n')
+    translateTexts = ''
+    for s in sentences:
+        translateTexts += translateSentence(s)
+        translateTexts += '\n'
+    return translateTexts
+print(translateText(TEXT))
+
+
+#数据结构   string
+print(help(str))   #会的到很长的帮助文档 常用的有 
+
+s = 'changjiang'
+print(len(s))   #测量长度
+print(s.split('j'))    #用j来分割
+print(s[1:-1])         #切片
+print(s.lower())        #小写 
+print(s.upper())        #大写
+print(s.find('j'))      #查找字符所在的位置
+
+
+·str测试     
+获取此路径中的版本号
+d:\proj\cj\shot\bl\scene\v001.mb
+
+path = r'd:\proj\cj\shot\bl\scene\v001.mb'   # r前缀取消转义符产生的误解 让转义符失去作用
+number = int(path.split('\\')[-1][1;-3])
+print(str(number).zfill(3))
+#此案例几乎包含了 string 最常用的一些玩法  
+
+#数据结构   set 
+·交集 ·并集 ·差集 
+A = {1,3,4,6,8,9,11}
+B = {2,3,4,7,11,9}
+print(A & B)  # 求交集 &
+print(A | B)  # 并集，全集  |  回车上头的竖线
+print(A - B)  #差集（先后有影响）
+print(B - A)  #差集（先后有影响）
+print(B ^ A)  # 求出 只属于a 或 b的
+
+a = [1,2,3,4,5,6]
+b = [2,4,6,8,10]
+
+print(list(set(a) - set(b)))   #a和b都是数组 set(a)将a集化 转换成一个集 
+
+list1 = [1,2,3,5,6,8,0,3,7,8]   #有重复元素
+print(list(set(list1)))   #这样就集化 再list化过滤掉重复的 
+
+
+# 文件的读写 
+·open  ·write ·close
+
+TEXT = '''My name is changjiang
+I like computergraphic especially vfx
+I like learning English
+That is my life'''
+
+f = open('Introduction.txt'.'w')
+f.write(TEXT)
+f.close()   #这样会打开一个txt 然后写入TEXT的内容 并保存关闭
+
+f=open('Introduction.txt')
+while True:
+    r=f.readline()
+    if len(r)=0:
+        break
+    print (r)    #len那行意思是如果新的行 that is my life 之后没了内容，就break 结束
+
+##  异常处理 
+·try  ·except（as） ·finally
+
+# try案例
+def tryThis():
+    return(1/0)
+try:
+    print(tryThis())
+except:
+    print('your number is not for the function!')
+print('ok,your calculation is done ! ')
+print('the result is ...')
+
+
+# except as案例
+def tryThis():
+    return(1/0)
+l = [0,1,2,3]
+try:
+    print(tryThis())
+    pass
+except ZeroDivisionError as e:
+    print('ERROR:',str(e))
+except Exception as e:
+    print('OTHER ERROR:',str(e))
+finally:                                    # finally   不管之前结果 总会执行一件事
+    print('you have do a number')   
+
+print('ok,your calculation is done ! ')
+print('the result is ...')
+
+# raise exception 限制非法操作 抛出异常，给用户一定警告性
+
+
+
