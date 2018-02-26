@@ -439,6 +439,42 @@ getenv PYTHONPATH;     ## getenv PYTHONPATH;这个mel会得到所有的环境变
 
 
 
-# 编写模块    __init__.py      __all__=[sub1,sub2]      让模块在import时候做点事情 
-    之前都是导入一些模块，引入别人写好的，但是一旦有了自己特定的需求，就需要编写模块。模块必须有__init__.py这个文件 
+# 编写模块    1.  __init__.py    2.   __all__=[sub1,sub2]      让模块在import时候做点事情 
+    之前都是导入一些模块，引入别人写好的，但是一旦有了自己特定的需求，就需要编写模块。模块必须有__init__.py这个文件
+一个路径下有__init__.py 把自己写的模块写进去
+import sys 
+sys.path.appened(r'C:User\changjiang\xxx\107')
+import m.func
+m.func.fn()   #fn这个函数里的内容就会被调用 
+
+sys.path.extend(r'C:User\\changjiang\\xxx\\107')
+from m import *    #直接*无法导入所有 必须在init文件里写一个东西  __all__ = ['func','func2']
+func
+func2  #这样在调用 1和2 这2函数时候就可以直接调用了  
+
+
+ ## ------------------------------------------------------标准库  ---------------------------------------------------
+ ## Python standard library 所有的python都有标准库 用了标准库里的东西 不用愁别人没有 
+
+import this   #this 就是一个pyhton之禅    实现的方法就和自制的库一样   
+this.__file__   #  'C:\\ProgramData\\Anaconda3\\lib\\this.py'   加上 .__file__后缀 就会得到文件所在的路径 
+
+#  · os 模块包含普遍的操作系统功能      · sys 和Python interpreter相关功能    这两是用的最多最频繁的标准库 
+os  
+os.name    
+os.getcwd()   
+os.chdir()      
+os.remove()     
+os.system()     
+os.sep      
+os.listdir()
+
+os.path.isfile()
+os.path.isdir()
+os.path.normpath()
+os.paht.getsize()
+os.path.join()
+os.path.basename()
+os.path.dirname()
+
 
