@@ -460,21 +460,118 @@ import this   #this 就是一个pyhton之禅    实现的方法就和自制的�
 this.__file__   #  'C:\\ProgramData\\Anaconda3\\lib\\this.py'   加上 .__file__后缀 就会得到文件所在的路径 
 
 #  · os 模块包含普遍的操作系统功能      · sys 和Python interpreter相关功能    这两是用的最多最频繁的标准库 
-os  
-os.name    
-os.getcwd()   
-os.chdir()      
-os.remove()     
-os.system()     
-os.sep      
-os.listdir()
+ os 标准库
+os.name     #求操作系统的平台  win  Linux 还是 mac  如果不知道os.name的内容，可以先import os   help(os)或help里面具体的一项 help(os.name)
+os.getcwd()   #get current work directory   获取当前的工作目录         
+os.chdir()    # 更改，切换目录  
+os.remove()    # 删除    括号里填路径
+os.system()     # 这里可移执行所有 cmd 里 可以实现的任务 
+os.sep          # 当前操作系统的分割符   \\
+os.listdir()    #  列举 某个路径里面的文件  
 
-os.path.isfile()
-os.path.isdir()
-os.path.normpath()
-os.paht.getsize()
-os.path.join()
-os.path.basename()
-os.path.dirname()
+os.path.isfile('C:\\Python34\\lib\\ntpath.py')    #判断是否是文件 
+os.path.isdir()               #判断是否是路径  
+os.path.normpath()   #将不标准的路径，转格式为标准的路径   os.path.normpath('C:\\Python34\\lib\\\\test.abc')  转完之后4斜杠就成了2斜杠 
+os.path.getsize()   #os.path.getsize(r'D:\迅雷下载\Arnold 5.0.mov')  得到结果 341694783 这就是文件size的大小    有中文路径加 r
+os.path.join()      #用于连接两个路径 如 os.path.join(dir,file) 得到结果'C:\\Python\\lib\\test.abc'  用join比较优雅 
+os.path.basename()  #对给到的字符串'C:\\Python\\lib\\test.abc' 取文件名 test.abc
+os.path.dirname()   #对给到的字符串'C:\\Python\\lib\\test.abc' 取路径名 C:\\Python\\lib
+
+  sys  标准库
+# sys库，先 import sys 导入库才可以访问sys   
+sys.path  #得到一大堆路径，这就是Python用到的路径  
+sys.version  #给出当前的版本号等信息
+sys.version_info  #给出更加程序有好的版本信息
+sys.platform      #给出Python的平台 win32
+sys.argv       #这参数是从程序外部输入的，而非代码本身的什么地方，要想看到它的效果就应该将程序保存了，从外部来运行程序并给出参数
+sys.exit()    #直接跳出  sys.exit(0)想正常退出就返回一个0 
+sys.stdout.write("a")  #写出字符 和字符长度 
+
+# 做一个找到最新的文件 方法1
+import os
+
+path = r'D:\BaiduNetdiskDownload'
+files = os.listdir(path)
+# print (files)     测试print  得到file里反馈的一大批文件名字[]
+# 过滤掉非文件
+files_f = []  #这里声明一个空列表，供下面将 路径+名字 存入 
+for f in files:        #遍历文件 将每个文件名与path连起来 成为路径+名字 
+    full_path = os.path.join(path, f)      
+    if os.path.isfile(full_path):   #识别一下 是否是文件了  
+     files_f.append(full_path)    # 如果是文件 将完整的路径+名字 的格式 就将信息加入到 files_f 里
+#比较
+latest_file = files_f[0]
+latest_mtime = os.path.getmtime(latest_file)  #getmtime 得到编辑的时间 单位是秒 从1970年开始计数的 
+for f in files_f:
+    current_mtime = os.path.getmtime(f)     
+    if current_mtime > latest_mtime    
+       latest_file = f
+       latest_mtime  = current_mtime
+
+print(latest_file)
 
 
+# 做一个找到最新的文件 方法2
+import os, sys
+path = r'D:\BaiduNetdiskDownload'
+
+files = os.listdir(path)
+
+files_f_filtered = [f     #过滤列表 
+    for f in [os.path.join(path, f)for f in files]   #把所有的files拿出来，给join一下  将所有元素变成full path 
+    if os.path.isfile(f)    # 只有是完整路径的时候 才将信息加入列表里 
+]
+
+files_f_filtered.sort(key=os.path.getmtime)     #sort排序 用key这个函数做排序依据 文件编辑的时间就是 key  从小到大排序
+print(files_f_filtered[-1])       #从小到大排序 所以输出的最后一个就是我们要的最新的那个 
+
+
+#  pymel 种树脚本    
+实现方法
+粒子替代： 操作比较麻烦 执行效率不高 
+
+Mel       行数多，维护效率低 变量多要读数据的流向和运算处理不直观，可读性低   mel是个强变量语言，对于变量的要求比较严格 
+
+pymel     维护效率高，可读性强，专用命令  
+
+
+from pymel.core import *
+import random 
+selectTrees = selected()  
+terrian = selected()[0]
+scale_min, scale_max = 0.8, 1.3   #一下赋2个值 
+possibility = 0.6
+
+for v in terrian.vtx:      # vtx 就是顶点
+    i = random.random()
+    if i <  possibility
+    scale_uniform = random.uniform(scale_min,scale_max)
+    newTree = duplicate(selectTrees[random.randint(0,len(selectTrees)-1)],rr=1)[0]
+    move(newTree,v.getPosition('world'))
+    rotate(newTree,(0,random.random()*360,0))
+    scale(newTree,[scale_uniform,scale_uniform,scale_uniform])
+
+
+# 离线转格式脚本    MB2MA
+不打开maya完成mb向ma的转换
+标准库sys
+maya.standalone
+
+import sys
+FROM, TO = sys.argv[1:3]
+
+import maya.standalone
+maya.standalone.initialize(name='python')
+
+from pymel.core import *
+
+print('Reading MB file...')
+openFile(FROM, f=1)
+
+print('Saving to <%s>...' % TO)
+saveAs(TO)
+print('Done!')
+
+
+#实战案例 --------------------------------------------抽奖机 --------------------------------------------
+ 
