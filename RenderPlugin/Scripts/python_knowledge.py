@@ -574,4 +574,231 @@ print('Done!')
 
 
 #实战案例 --------------------------------------------抽奖机 --------------------------------------------
- 
+
+# coding: utf-8
+
+__author__ = 'NeroBlack'
+from pymel.core import *
+import maya.mel as mm
+import random
+import codecs
+
+
+FONT        = '宋体|w400|h-2'
+RADIUS      = 10
+THICKNESS   = 6
+VERSION_STR = '0.1'
+WIN_NAME    = 'RNMB'
+LIST_NAME   = 'luckerList'
+SPEED_RANGE = (25, 40)
+ACC_RANGE   = 48.0
+DAMPING     = 0.15
+PTR_COLOR   = (1, 0, 0)
+IND_COLOR   = (0.3, 0.3, 0.3)
+WHEEL_COLOR = [(1, 1, 1),
+               (0.224994, 1, 0.73875),
+               (0.483162, 1, 0),
+               (0.786526, 1, 0),
+               (1, 0.977554, 0),
+               (1, 0.573053, 0)]
+FRM_MAX     = 5000
+FRM_FIREWORK= FRM_MAX-300
+#debug
+LUCKERS     = ['yeti', 'shave', 'xgen', 'nHair', 'qux']
+newline     = '\r\n'
+
+ENGINE_EXP  = r'''
+// created by RollNMB
+float $accelerate_range = %f;   // ACC_RANGE
+float $damping = %f;            // DAMPING
+int $frame_firework = %i;       // FRM_FIREWORK
+if (frame==1) {
+    wheel.rotateX = %f;         // wheel_init_angle
+	wheel.speed = 0;
+} else if (frame<$frame_firework){
+	if (frame<=$accelerate_range)
+		wheel.speed = linstep(1, $accelerate_range, frame)*wheel.maxSpeed;
+	else
+		wheel.speed = max(0, wheel.speed-$damping);
+    wheel.rotateX+= wheel.speed;
+
+	if (wheel.speed<1e-3) {
+		int $id = (wheel.rotateX-%f)/%f %% %i+0.5;  // wheel_init_angle 360/NLUCKER NLUCKER
+		textScrollList -e -append $LUCKERS[$id] %s; // LIST_NAME
+		currentTime $frame_firework;
+	}
+}
+
+// avoid strange lag
+if (frame==$frame_firework+1)
+	play;
+'''
+
+
+def readLuckers():
+    global LUCKERS
+    list_path = fileDialog(m=0, title=u'Please choose the lucker\'s list')
+    LUCKERS = None
+    if list_path:
+        f = open(list_path, 'r')
+        LUCKERS = f.readlines()
+        f.close()
+
+        LUCKERS = [i.strip('\n\r') for i in LUCKERS]
+        cmd = 'string $LUCKERS[] = {"%s"}' % ('", "'.join(LUCKERS))
+        print(cmd)
+        mm.eval(cmd)
+
+def saveList(*args):
+    the_chosen_one = textScrollList(LIST_NAME, q=1, ai=1)
+    if len(the_chosen_one) is 0:
+        warning(u'没选出名单存NMB')
+        return
+    list_path = fileDialog(m=1, title=u'Save to')
+    if list_path:
+        the_chosen_one = [i+newline for i in the_chosen_one]
+        f = codecs.open(list_path, 'wb', 'utf-8')
+        f.write(u'中奖名单：'+newline)
+        f.writelines(the_chosen_one)
+        f.close()
+        print(u'保存到 %s 成功' % list_path)
+
+def createFireworks():
+    import maya.mel as mm
+    args = (0, -RADIUS*1.5, RADIUS*1.5,     # launch pos
+            0, RADIUS*0.5, RADIUS,  # burst pos
+            FRM_FIREWORK)           # start frame
+    cmds = 'fireworks "" 5 32 "" "" 10 %f %f %f %f %f %f 10 10 10 %i 0.1 30 60 ; ' % args
+    mm.eval(cmds)
+    for i in ls(typ='particle'):
+        i.startFrame.set(FRM_FIREWORK)
+    select(cl=1)
+
+
+def roll(*args):
+    global wheelnode
+    wheelnode.maxSpeed.set(random.uniform(SPEED_RANGE[0], SPEED_RANGE[1]))
+    currentTime(1)
+    play()
+    print ('RollNMB')
+
+def assignShader(object, shader_name):
+    select(object)
+    hyperShade(assign=shader_name)
+
+def createShader(name, color):
+    shader = shadingNode('lambert', asShader=1)
+    shader.rename(name)
+    shader.color.set(color)
+    return shader
+
+def setupScene():
+    """
+        wu di feng huo lun ~
+    """
+    global wheelnode
+    nluckers = len(LUCKERS)
+    ptr_shader = createShader('PointerS', PTR_COLOR)
+    ''' === feed shaders === '''
+    if not objExists('Wheel0'):
+        for i in xrange(len(WHEEL_COLOR)):
+            createShader('Wheel%i'%i, WHEEL_COLOR[i])
+    indicator_shader = createShader('IndicatorS', IND_COLOR)
+
+    ''' === create lunzi === '''
+    wheelnode = polyCylinder(r=RADIUS,
+                h=THICKNESS,
+                sx=nluckers,
+                sy=1, sz=1,
+                ax=(1, 0, 0),
+                rcp=0, cuv=3, ch=0)[0]
+    delta = 360.0/nluckers
+    rotate(wheelnode, (0.5*delta-90, 0, 0), r=1)
+    wheelnode.rename('wheel')
+    addAttr(wheelnode, ln='speed', at='double')
+    addAttr(wheelnode, ln='maxSpeed', at='double')
+    face_templ = wheelnode.nodeName()+'.f[%i]'
+    for i in xrange(nluckers):
+        assignShader(face_templ % i, 'Wheel%i' % (i % len(WHEEL_COLOR)))
+    refresh()
+
+    ''' === create indicator === '''
+    indicator = sphere(r=RADIUS*0.1, ch=0)[0]
+    move(indicator, (THICKNESS*0.5, 0, RADIUS*0.8))
+    scale(indicator, 0.3, 1, 1)
+    assignShader(indicator, indicator_shader)
+    indicator.setParent(wheelnode)
+
+    ''' === create pointer === '''
+    pointernode = polyCylinder(r=RADIUS*0.2,
+                h=RADIUS*0.1,
+                sx=3, sy=1, sz=1,
+                ax=(0, 0, 1),
+                rcp=0, cuv=3, ch=0)[0]
+    move(pointernode, (-THICKNESS*0.5-RADIUS*0.2, 0, RADIUS))
+    pointernode.rename('pointer')
+    assignShader(pointernode, ptr_shader.nodeName())
+    refresh()
+
+    ''' === create labels === '''
+    for l in LUCKERS:
+        textnode = PyNode(textCurves(ch=0, f=FONT, t=l)[0])
+        bbx = textnode.getBoundingBox()
+        xcenter, ycenter = (bbx[0][0]+bbx[1][0])/2,(bbx[0][1]+bbx[1][1])/2
+        move(textnode, (-xcenter, -ycenter, RADIUS))
+        textnode.setParent(wheelnode)
+        rotate(wheelnode, (delta, 0, 0), r=1)
+        refresh()
+
+    ''' === engine === '''
+    wheel_init_angle = wheelnode.rx.get()
+    expname = 'WheelEngineExp'
+    if objExists(expname):
+        delete(expname)
+    expression(n=expname,
+               s=ENGINE_EXP % (ACC_RANGE,
+                               DAMPING,
+                               FRM_FIREWORK,
+                               wheel_init_angle,
+                               wheel_init_angle, 360.0/nluckers, nluckers,
+                               LIST_NAME),
+               ae=1, uc='all')
+
+def setFrameRange():
+    playbackOptions(max=FRM_MAX)
+
+def showGUI():
+    """
+        make UI window
+    """
+    if window(WIN_NAME, exists=1):
+        deleteUI(WIN_NAME)
+    try:
+        windowPref(WIN_NAME, r=1)
+    except:
+        pass
+    window(WIN_NAME, width=350, height=33, title='RollNMB v%s' % VERSION_STR)
+    columnLayout(adj=1)
+    textScrollList(LIST_NAME, numberOfRows=5, allowMultiSelection=1)
+    button(label='ROLL', h=60, bgc=[0.426686, 0.5, 0.3875], c=roll)
+    button(label='Save', h=40, bgc=[0.370004, 0.3, 0.6350], c=saveList)
+    text(label=u'NMB荣誉出品 www.NeroBlack.org')
+    showWindow()
+
+def run():
+    readLuckers()
+    if not LUCKERS:
+        return
+    setupScene()
+    createFireworks()
+    setFrameRange()
+    showGUI()
+
+import traceback
+try:
+    run()
+except:
+    print traceback.format_exc()
+
+
+#--------------------------------------------------------------踩地翻滚脚本--------------------------------------------------------
