@@ -76,7 +76,7 @@ print("just Saved "+($fileName+$counter+".ma"));
  //---------------------------------match命令的用法 -------------------------------------
 string $fileName = `file -q -sceneName -shortName`;
 $fileName = substituteAllString($fileName,".ma","");
-string $stringNumber = `match "[0-9]+" $fileName`; //match返回第二个字符串与第一个字符串相匹配的内容
+string $stringNumber = `match "[0-9]+" $fileName`; //match返回第二个字符串与第一个字符串相匹配的内容      match 0 可以把开头数字0都去掉
 int $n=$stringNumber;     //将字符串类型的变量转换为整型，用于数字累加 新定义一个整数，数字就是字符串的值
 $n=$n+1;
 $fileName = substituteAllString($fileName,$stringNumber,"");  //到这里实现了文件名后面的数字清除
@@ -111,7 +111,7 @@ addAttr -ln "red" -at "float" -parent "controlColor";
 addAttr -ln "green" -at "float" -parent "controlColor";
 addAttr -ln "blue" -at "float" -parent "controlColor";
 //----------------------------------connectAttr强制链接属性--------------------------------------
-string $sel[]=`ls -lt`;
+string $sel[]=`ls -lt`;   //选择场景中的灯光 
 for($myObject in $sel){
     connectAttr -f locator1.controlColor ($myObject".color"); //强制链接属性
     connectAttr -f locator1.contolLightsIntensity ($myObject".intensity");
@@ -128,7 +128,6 @@ print "hello"
 myString = "this is my first python string" //不用$符号来定义 它自己判断这是个字符串
 print myString
 // 在Python中使用变量，使用mel的代码
-import maya.cmds as cmds   #这样下方的cmds.就可以代表maya.cmds了 缩减的写法
 myList = cmds.polySphere() 
 print ("the object is "+myList[0]) #这样就输出第一个信息
 //-class3 eval的使用！ 
@@ -156,10 +155,6 @@ float $y = rand(0,5);
 setAttr "pSphere1.translateY" $y;
 print $y;
 
-int $z = rand(0,5);
-setAttr "pSphere1.translateY" $z;
-print $z;
-
 /*                     矢量                        */ 
 vector $v = <<0,0,0>>;
 print ($v.x);  //矢量会有3个值
@@ -167,7 +162,7 @@ vector $rgb = <<rand(0,1),rand(0,1),rand(0,1)>>;
 particleShape1.rgbPP = $rgb;    //创建给粒子的rgbPP属性上，
 
 /*                    字符串                       */ 
-string $name = "pSphere" + int(rand(1,4));   //1-3中随机切换
+string $name = "pSphere" + int(rand(1,4));   //会在小球 1-3中随机切换
 select -r $name;
 print $name;
 //或者使用另一个方法
@@ -213,9 +208,11 @@ else{print "xiaoyu 5";}
 
 //如果要随机选择大于50个灯光，不够不执行下一步    (数组和条件语句结合的例子)
 string $dengguangshu[]=`ls -sl`;
+int $numb =`size($dengguangshu)`;
 if(`size($dengguangshu)`>50){print "enough!";}
 else{
-    print "not enough 50 !";
+print ("now the number is "+($numb)+",not enough 50 !");
+
 }
 
 //particle tool 创建粒子网格 工具里勾上particle grid
@@ -296,7 +293,7 @@ for($i=0;$i<100;$i++)
 
                             ----------    for in   循环 -----------
 /*for in 循环有别与之前的for 和while 循环（递增和递减的，类似于顺序变化的循环）
-而for in 循环更加的灵活，它定义的是数组，做的循环是数组内的每一个元素做一次事情*/
+而for in 循环更加的灵活，它定义的是组，做的循环是组内的每一个元素做一次事情*/
 定义数组；
 for（新变量 in 数组）
 {
@@ -304,15 +301,15 @@ for（新变量 in 数组）
 }
 //例子
 int $aa[] = {1,2,3,4,7,13,341,66,45};
-for ($bb in $aa)    //这里的bb指的就是每一个变量
+for ($bb in $aa)    //这里的bb指的就是每一个变量  这里的bb可以是任何字符
 {
-print ($bb+" ");
+print ($bb+" ");      //括号代表有运算 
 }
 /*例子 建了很多灯光 如果想让中间选择的衰减，其他的不衰减，这样的物体名称就不连续了，需要for in 来做
 如果想选择形状节点，而不是灯光的变换节点 就是小键盘的 上 下  
 */
 pickWalk -d down;         //意思是选择什么都无所谓，都会先按 “下”，再执行将名称注入列表
-string1 $select[]=`ls -sl`;  //把选择物体的名称列入数组里
+string1 $select[]=`ls -sl`;  //把选择物体的名称列入数组里，将名称注入列表
 for($lightName in $select)   //$lightName相当于$sel里的每一个元素
 {
     setAttr ($lightName+".decayRate") 1;  //$lightName是变量 .decayrate是字符串不能直接连，需要.decayrate加上+和“ ”
@@ -360,6 +357,7 @@ global proc lizi()
 }
 lizi;   //选择2个粒子 执行即可 这就算调用了
 //************************************************************************************
+   //           到了返回值 return
 global proc string liziB()
 {
     pickWalk -d down;  
@@ -522,7 +520,7 @@ float $rotateZ = rand(-360,360);//定义好3个旋转值 角度就是0-360
 
 setAttr ($selection[$i]+".tx") $transX;
 setAttr ($selection[$i]+".ty") $transY;
-setAttr ($selection[$i]+".tz") $transZ;   //  重要：没有运算的不加括号(但加了也不算错，能运行) 有运算的才加括号（字符串叠加也是运算）
+setAttr ($selection[$i]+".tz") $transZ;   //  重要：没有运算 的不加括号(但加了也不算错，能运行) 有运算的才加括号（字符串叠加也是运算）
 setAttr ($selection[$i]+".rx") $rotateX;
 setAttr ($selection[$i]+".ry") $rotateY;
 setAttr ($selection[$i]+".rz") $rotateZ;
@@ -653,7 +651,7 @@ rainColor();    //封包好了以后，直接source这个mel就好了
 //-------------------------------------------------maya前台批渲染脚本---------------------------------------------------
 //maya的部分命令是基于window的所以前台渲，需要先打开window在点击渲染
 
-global proc NBRender(int $start,int $end,string $path,string $name,string $camera)
+global proc NBRender(int $start,int $end,string $path,string $name,string $camera)  //这个就有好几个依据值
 {
 for($i=$start;$i<$end;$i++)
 {
@@ -780,7 +778,7 @@ for($i=$start;$i<=$end;$i++)
 
          progressWindow -edit
              -progress $amount
-             -status ("Frame: "+$amount+"/"+$end);
+             -status ("Frame: "+$amount+"/"+$end);     //   当前帧/所有帧     如：53/100
 
 currentTime $i ;
 RenderViewWindow;
@@ -834,9 +832,16 @@ system("start C:/Program Files/Adobe/xxxx/Photoshop.exe");  //注意是反斜线
 在脚本编辑器中打开echo all command 可以返回大多数mel指令 对于不能返回的 就要用到whatIs
 whatIs 后面跟想求的东西;  //很大程度上可以得到想要的
 
+whatIs optionMenu;
+// Result: Command // 
+
 //**********************************    about 可返回一些和软件相关的基础信息  *******************************
 打开tooltip help 可以查看有关系的后缀 
 about -ct
+// Result: 16:45:49 // 
+about -cd;
+// Result: 2018/03/02 // 
+
 
 
 //**********************************    临时变量的数据类型转换  *******************************
@@ -847,10 +852,9 @@ about -ct
     string $i[] = {"10","abc","1314"};
 
 }
-//常规出错是 往往写第一个插件没问题 在声明就出错了，是因为将同一个名称声明了2次，而2次的数据类型不一样
+
+常规出错是 往往写第一个插件没问题 在声明就出错了，是因为将同一个名称声明了2次，而2次的数据类型不一样
 而各自在自己的大括号内即 global proc内 就不会有问题
-
-
 
 
 //**********************************    改写mel脚本直接执行的方法  *******************************
@@ -993,7 +997,7 @@ columnLayout -adjustableColumn true;
 	button -bgc 0.7 0.9 0.7 -label "ParticleToLines"   -align "center"   -h 40 -c "particleToLines";
 	button -bgc 0.9 0.6 0.7 -label "LinesToTubes" -align "center" -h 40 -c "linesToTubes";
 showWindow $window;
-window -e -wh 500 400 PTLT;
+window -e -wh 500 400 PTLT;   //刷新尺寸 上边不定义尺寸 尺寸在这里定义 
 global proc particleToLines()
 {   
    //for curve
@@ -1113,10 +1117,10 @@ substitute "I" "I name is hanmeimei" "my"
 /*如果ls -sl了shape节点 想选择transform节点 除了pickWalk -d up之外
 还可以用substitu替换 来做  */
 string $meshName[] = `ls -type "mesh"`;  //选择场景中所有 类型为模型
-fo($i=0;$i<size(meshName);$i++)
-{$meshName[$i]=`substitute "Shape" $meshNmae[$i] ""`;}
+for($i=0;$i<size($meshName);$i++)
+{$meshName[$i]=`substitute "Shape" $meshName[$i] ""`;}
 //将所有meshname里的shape后缀替换为“”空 这样就选择了transform节点
-select $meshName;   //相当于把后缀去掉了在返回写入给meshName这个变量里  就得到了选择transform节点的目的  
+select $meshName;    //相当于把后缀去掉了在返回写入给meshName这个变量里  就得到了选择transform节点的目的  
 
 
 //********************************match**********************************
